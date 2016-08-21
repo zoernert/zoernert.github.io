@@ -59,7 +59,7 @@ function updateProg() {
 	if(gsi.plz.length!=5) return;
 	if(gsi.oldplz!=gsi.plz) {
 		$('#prog').show();
-		$('#progpng').attr('src','http://mix.stromhaltig.de/gsi/preisverlauf/img/'+gsi.plz+'.png');
+		$('#progpng').attr('src','https://mix.stromhaltig.de/gsi/preisverlauf/img/'+gsi.plz+'.png');
 		gsi.oldplz=gsi.plz;
 	}
 }
