@@ -1,6 +1,8 @@
+var call_delay=100;
 if(!web3) {
 	if (typeof web3 !== 'undefined') {
 	  web3 = new Web3(web3.currentProvider);
+	  call_delay=200; // Hack to get rid of MetaMask challenges
 	} else {  
 	  if(Web3) {
 		web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -18,7 +20,7 @@ gsi.obj = [];
 calls = [];
 
 var call_semaphore=false;
-call_delay=1000;
+
 
 function serialCall() {	
 	if((calls.length>0)&&(!call_semaphore)) {
@@ -26,9 +28,10 @@ function serialCall() {
 		var call=calls.shift();
 		
 		call.param.push(function(e,r) {			
-			call.cb(e,r);
+			call.cb(e,r);			
 			call_semaphore=false;
 			if(calls.length>0) setTimeout(serialCall,call_delay);
+			
 		});
 		console.log("callSeq",call.param);
 		// This is dirty... 
@@ -75,9 +78,13 @@ function updateRendition(name) {
 	$('.gsiactive').html(gsi.address);
 	if(name=="GreenToken") {
 			chainCall(
-			gsi.obj[name].balanceOf,[gsi.address],function(e,r) {
-				console.log("GreenToken.balanceOf()",e,r);
-				var event = gsi.obj.GreenToken.Transfer();
+			gsi.obj[name].balanceOf,[gsi.address],function(e,r) {		
+				if(!gsi.obj[name]) { 
+					updateRendition(name);
+					console.log("Async Error");
+					return; 
+				}
+				var event = gsi.obj[name].Transfer();
 				$('.balance-green').attr('title','Token Adresse: '+ gsi.obj.GreenToken.address);
 				event.watch(function(error, result){						
 						$('.balance-green').css('color','#c0c0c0');
@@ -95,8 +102,12 @@ function updateRendition(name) {
 	if(name=="GreyToken") {
 			chainCall(
 			gsi.obj[name].balanceOf,[gsi.address],function(e,r) {
-				console.log("GreyToken.balanceOf()",e,r);
-				var event = gsi.obj.GreyToken.Transfer();
+				if(!gsi.obj[name]) {
+					updateRendition(name);
+					console.log("Async Error");
+					return
+				}
+				var event = gsi.obj[name].Transfer();
 				$('.balance-gray').attr('title','Token Adresse: '+ gsi.obj.GreyToken.address);
 				event.watch(function(error, result){	
 						$('.balance-gray').css('color','#c0c0c0');
@@ -193,6 +204,19 @@ function oracalizeReading() {
 				);	
 }
 
+function drawTokenChart() {
+ $('#txchartrow').show();
+ var chart = new google.visualization.LineChart(document.getElementById('txchart'));
+ var mdata=[['BlockNumber', 'GreenToken']];
+ 
+ 
+ var event = gsi.obj.GSI.MintedGreen({},{fromBlock:1900000},function(e,r) {
+    var row=[r.blockNumber,r.args.amount.c[0]]; 
+	mdata.push(row);
+	var data = google.visualization.arrayToDataTable(mdata,false); 	  
+	chart.draw(data, {width: 400, height: 240});
+  }); 	   
+}
 function resetCallStack() {
     console.log("ResetCallStack!!!!");
 	calls=[];	

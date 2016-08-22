@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+	 google.charts.load('current', {'packages':['corechart']});
+	</script>
   </head>
   <body>
     <div class="container" id="app_content">
@@ -80,7 +84,14 @@
 			<div class="col-md-4"><h4>Index-Werte</h4>
 			<p>Stromverbrauch, der bei einem Wert von <strong>über 50</strong> stattfindet, wird mit Grünstrom-Token belohnt.</p> 
 			<p>Stromverbrauch, der bei einem Indexwert von <strong>unter 50</strong> stattfindet, wird mit Graustrom-Token vergütet.</p>
+			<p>Sobald <strong>zwei Ablesungen</strong> vorhanden sind, die mindestens eine und höchstens 24 Stunden getrennt voneinander durchgeführt werden, erfolgt die <strong>Gutschrift der Tokens</strong>.</p>
+			<p>Sowohl Grünstrom als auch Graustrom-Tokens sind Ethereum <strong>Standard-Tokens</strong> (EIP-20) und können gehandelt, getauscht oder in andere Tokens gewechselt werden.</p>
 			</div>
+		</div>
+		<hr/>
+		<div class="row" id="txchartrow" style="display:none">
+			<h3>Kontoverlauf</h3>
+			<div id="txchart"></div>
 		</div>
 	</div>
     <script src="https://code.jquery.com/jquery.js"></script>
