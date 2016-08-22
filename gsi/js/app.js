@@ -148,6 +148,7 @@ function updateRendition(name) {
 					gsi.requestreading=r[0].c[0];
 					gsi.plz=r[2];
 					updateProg();
+					$('#requestedPLZ').attr('value',r[2]);
 					$('.gsiplz').html(r[2]);
 				}			
 				if(gsi.requestreading!=gsi.lastreading) {
