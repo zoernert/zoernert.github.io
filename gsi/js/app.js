@@ -2,7 +2,7 @@ var call_delay=100;
 if(!web3) {
 	if (typeof web3 !== 'undefined') {
 	  web3 = new Web3(web3.currentProvider);
-	  call_delay=200; // Hack to get rid of MetaMask challenges
+	  call_delay=1000; // Hack to get rid of MetaMask challenges
 	} else {  
 	  if(Web3) {
 		web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
@@ -52,10 +52,12 @@ function chainCall(fnct,param,cb) {
 	call.fnct=fnct;
 	call.cb=cb;
 	call.param=param;
-	calls.push(call);	
-	if(!call_semaphore) {
-		serialCall();
-	}	
+	calls.push(call);
+	setTimeout(function() {
+		if(!call_semaphore) {
+			serialCall();
+		}	
+	},call_delay);
 }
 
 function updateProg() {
