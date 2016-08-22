@@ -89,9 +89,74 @@
 			</div>
 		</div>
 		<hr/>
+		<div class="row">
+			<h3>Handel/Transfer</h3>
+			
+		</div>
+		<hr/>
 		<div class="row" id="txchartrow" style="display:none">
 			<h3>Kontoverlauf</h3>
 			<div id="txchart"></div>
+		</div>
+		<div class="row" style="border-top:1px solid #303030">
+			<h1>Informationen</h1>
+			<h2>GrünStromIndex</h2>
+			<p>Der <a href="https://mix.stromhaltig.de/gsi/" target="_blank">GrünstromIndex</a> wurde im Jahre 2013 entwickelt und ist seither ein fester Bestandteil in vielen Anwendungen und Geräten, die eine Verfügbarkeit von Stromerzeugung aus Wind- und Sonnenenergie der kommenden 36 Stunden benötigen.</p>
+			<p>Im Rahmen dieser Blockchain-Anwendung wird der GrünStromIndex für die Herausgabe von zwei Tokens verwendet.</p>
+			<h3>Grünstrom/Graustrom-Token</h3>
+			<p>
+			Bei den beiden Tokens handelt es sich um jeweils einen Ethereum-Smart-Contract, der der <a href="https://github.com/ethereum/EIPs/issues/20" target="_blank">EIP-20 Spezifikation</a> für Tokens folgt. Damit sind diese beiden Tokens kompatibel zu allen Verwendungsmöglichkeiten eines Ethereum-Tokens.  
+			</p>
+			<ul>
+				<li>Besitz</li>
+				<li>Senden an eine andere Adresse</li>
+				<li>Keine "Doppel-Ausgabe" (jeder Token existiert nur einmal und kann nicht vervielfältigt werden)</li>
+				<li>Handel/Umtausch (Tausch gegen andere Tokens)</li>
+			</ul>
+			<h3>Herausgabe von neuen Tokens</h3>
+			<p>
+			Um neue Tokens zu erhalten, ist der Zählerstand in Watt-Stunden zweimal im Abstand von mindestens einer und höchstens 24 Stunden einzugeben. Sobald die Transaktion in der Blockchain sichtbar ist wird ein sogenanntes Orakel prüfen, welche Werte der GrünStromIndex zwischen den beiden Ablesungen hatte und entsprechend dem Verbrauch Tokens ausgeben. 
+			</p>
+			<p>
+			Liegt das Zeitfenster zwischen den Ablesungen im Bereich von viel Grünstrom, so erhält man Grünstrom-Token.
+			</p>
+			<p>
+			Liegt das Zeitfenster zwischen den Ablesungen im Bereich von viel Graustrom, so erhält man Graustrom-Token.
+			</p>
+			<h2>Crypto-Währungen</h2>
+			<h3>Blockchain</h3>
+			<p>Bei einer Blockchain handelt es sich um eine verteilte Datenbank welche zwischen allen Nutzern geteilt wird. In dieser Datenbank wird eine Art Kontenbuch geführt, welches sämtliche Transaktionen beinhaltet.</p>
+			<p>Im Gegensatz zu Bitcoin ist es bei <a href="https://www.ethereum.org/" target="_blank">Ethereum</a> möglich, mit sogenannten Smart-Contracts zu arbeiten, welche jeweils einer Logik folgen. So existiert die Logik für die beiden Tokens, allerdings auch die Logik für das Auslesen des Grünstrom-Indexes in der Blockchain von Ethereum.</p>
+			<h3>Transaktionen</h3>
+			<p>Die Logik ist Programmcode, welcher wie eine Beschreibung an Transaktionen hängt. Die Beschreibung macht die Regeln des Smart-Contract aus. 
+			</p>
+			<p>
+			Vom Anwender ausgeführte Transaktionen:
+			<ul>
+			<li>Setzen der Postleitzahl</li>
+			<li>Setzen des Zählerstandes</li>
+			</ul>
+			Im Hintergrund ausgeführte Transaktionen:
+			<ul>			
+			<li>Gutschrift der Tokens bei der Herausgabe</li>
+			<li>Ersetzen des vorletzten durch den letzten Zählerstands zur Ermittlung der Verbrauchsmenge</li>
+			<li>Vergütung des Orakel</li>
+			</ul>
+			Vom Orakel ausgeführte Tranksationen:
+			<ul>
+			<li>Ermitteln des GrünStromIndex für Postleitzahl</li>
+			</ul>
+			</p>
+			<h3>Transparenz</h3>
+			<p>Diese Anwendung läuft in der öffentlichen Ethereum Blockchain und kann dadurch von jedem mit den entsprechenden Werkzeugen unabhängig von dieser Seite eingesehen werden.</p>
+			<p>
+			Die Verträge:
+			<ul>
+				<li><a href="http://etherscan.io/address/0xa39394d3447c1dbD386b92B4d1fCc22cA85EAe67" target="_blank">Hauptvertrag GSI</a></li>
+				<li><a href="http://etherscan.io/address/0x045d2c4d9011e30eeca01e76c2989253274e4a92" target="_blank">Grünstrom Token</li>
+				<li><a href="http://etherscan.io/address/0x1e8e22c878119d341c03b859795ea55a5ef21c18" target="_blank">Graustrom Token</li>
+			</ul>
+			</p>
 		</div>
 	</div>
     <script src="https://code.jquery.com/jquery.js"></script>
