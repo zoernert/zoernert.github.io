@@ -9,7 +9,9 @@ if(!web3) {
 	  }
 	}
 }
-
+if(!web3) {
+	$('#alerter').html('<div class="alert alert-danger alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Verbindung zur Blockchain nicht möglich.</strong><br/>Web3 wurde nicht gefunden. Bitte <a href="https://metamask.io/" target="_blank">MetaMask.io (Browser Erweiterung)</a> installieren, oder MIST-Browser verwenden.</div>');
+}
 Number.prototype.format = function(n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.');
