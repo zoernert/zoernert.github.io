@@ -1,4 +1,5 @@
 var call_delay=100;
+try {
 if(!web3) {
 	if (typeof web3 !== 'undefined') {
 	  web3 = new Web3(web3.currentProvider);
@@ -9,7 +10,7 @@ if(!web3) {
 	  }
 	}
 }
-if(!web3) {
+} catch(r) {
 	$('#alerter').html('<div class="alert alert-danger alert-dismissible" role="alert"> <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><strong>Verbindung zur Blockchain nicht möglich.</strong><br/>Web3 wurde nicht gefunden. Bitte <a href="https://metamask.io/" target="_blank">MetaMask.io (Browser Erweiterung)</a> installieren, oder MIST-Browser verwenden.</div>');
 }
 Number.prototype.format = function(n, x) {
