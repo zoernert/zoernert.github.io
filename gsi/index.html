@@ -67,14 +67,18 @@
 		<div class="row">
 			<h3>Zählerdaten</h3>
 			<table class="table table-striped">
-				<tr><th>Adresse</th><th><span class="gsiactive"></span> <button class="btn btn-small btn-primary" id="swView"><span class="glyphicon glyphicon-scale"></span></button></th></tr>
-				<tr><td>Postleitzahl</td><td><span class="gsiplz"></span></td></tr>
-				<tr><td>Zählerstand</td><td><span class="gsivalue"></span> Wh</td></tr>
-				<tr><td>Ablesung</td><td><span class="gsitime"></span></td></tr>
-				<tr><td>Wartet auf Oracle</td><td><span id="gsiwait">-</span></td></tr>
-				<tr><td>Ether Guthaben</td><td><span id="ethbalance"></span> (<span id="ethtx"></span> Transaktionen) [<a href="https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39" target="_blank">aufladen</a>]</td></tr>
+				<tr><th>Adresse</th><th><span class="gsiactive"></span></td><td><button class="btn btn-sm btn-primary" id="swView"><span class="glyphicon glyphicon-scale"></span> wechseln</button></th></tr>
+				<tr><td>Postleitzahl</td><td colspan="2"><span class="gsiplz"></span></td></tr>
+				<tr><td>Zählerstand</td><td colspan="2"><span class="gsivalue"></span> Wh</td></tr>
+				<tr><td>Ablesung</td><td colspan="2"><span class="gsitime"></span></td></tr>
+				<tr><td>Wartet auf Oracle</td><td colspan="2"><span id="gsiwait">-</span></td></tr>
+				<tr><td>Ether Guthaben</td><td><span id="ethbalance"></span></td><td><a href="https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39" target="_blank" id="loadETH" class="btn btn-sm btn-primary">aufladen</a>
+				<div id="loadINFO" style="display:none">
+					Um diesen SmartMeter aufzuladen ist als <strong>Bestimmungsort</strong> folgende Ethereum Addresse anzugeben:<br/>
+					<strong><span class="gsiactive"></span></strong>				
+				</div></td></tr>
 			</table>
-		</div>
+		</div>		
 		<hr/>
 		<div class="row" id="prog" style="display:none">
 			<h3>Prognose Grünstromindex</h3>
@@ -84,14 +88,34 @@
 			<div class="col-md-4"><h4>Index-Werte</h4>
 			<p>Stromverbrauch, der bei einem Wert von <strong>über 50</strong> stattfindet, wird mit Grünstrom-Token belohnt.</p> 
 			<p>Stromverbrauch, der bei einem Indexwert von <strong>unter 50</strong> stattfindet, wird mit Graustrom-Token vergütet.</p>
-			<p>Sobald <strong>zwei Ablesungen</strong> vorhanden sind, die mindestens eine und höchstens 24 Stunden getrennt voneinander durchgeführt werden, erfolgt die <strong>Gutschrift der Tokens</strong>.</p>
-			<p>Sowohl Grünstrom als auch Graustrom-Tokens sind Ethereum <strong>Standard-Tokens</strong> (EIP-20) und können gehandelt, getauscht oder in andere Tokens gewechselt werden.</p>
+			<p>Sobald <strong>zwei Ablesungen</strong> vorhanden sind, die mindestens eine und höchstens 24 Stunden getrennt voneinander durchgeführt werden, erfolgt die <strong>Gutschrift der Token</strong>.</p>
+			<p>Sowohl Grünstrom als auch Graustrom-Tokenssind Ethereum <strong>Standard-Tokens</strong> (EIP-20) und können gehandelt, getauscht oder in andere Tokens gewechselt werden.</p>
 			</div>
 		</div>
 		<hr/>
 		<div class="row">
 			<h3>Handel/Transfer</h3>
+			    <h4>Transfer Grünstrom-Token</h4>
+				<form class="form-inline" onsubmit="return false;">				
+				  <div class="form-group">
+						<label class="sr-only" for="sendTokens">Grüntoken Versenden</label>			
+						<div class="input-group">
+						
+						  <input type="number" class="form-control" id="sendTokens" placeholder="Anzahl der Grünstrom-Tokens">
+						
+						  <div class="input-group-addon">P+</div>
+						</div>
+					
 			
+						<label class="sr-only" for="sendTo">Empfänger (Account)</label>
+						<div class="input-group">
+							<div class="input-group-addon">Account</div>
+							<input type="txt" class="form-control" id="sendTo" placeholder="Empfänger (0x123...)">
+						</div>
+
+					<button type="submit" class="btn btn-primary" id="doSend">versenden</button>
+				  </div>
+				</form>
 		</div>
 		<hr/>
 		<div class="row" id="txchartrow" style="display:none">
@@ -113,7 +137,7 @@
 				<li>Keine "Doppel-Ausgabe" (jeder Token existiert nur einmal und kann nicht vervielfältigt werden)</li>
 				<li>Handel/Umtausch (Tausch gegen andere Tokens)</li>
 			</ul>
-			<h3>Herausgabe von neuen Tokens</h3>
+			<h3>Herausgabe von neuen Token</h3>
 			<p>
 			Um neue Tokens zu erhalten, ist der Zählerstand in Watt-Stunden zweimal im Abstand von mindestens einer und höchstens 24 Stunden einzugeben. Sobald die Transaktion in der Blockchain sichtbar ist wird ein sogenanntes Orakel prüfen, welche Werte der GrünStromIndex zwischen den beiden Ablesungen hatte und entsprechend dem Verbrauch Tokens ausgeben. 
 			</p>
@@ -123,7 +147,7 @@
 			<p>
 			Liegt das Zeitfenster zwischen den Ablesungen im Bereich von viel Graustrom, so erhält man Graustrom-Token.
 			</p>
-			<h2>Crypto-Währungen</h2>
+			<h2>Stromtoken als Crypto-Währungen</h2>
 			<h3>Blockchain</h3>
 			<p>Bei einer Blockchain handelt es sich um eine verteilte Datenbank welche zwischen allen Nutzern geteilt wird. In dieser Datenbank wird eine Art Kontenbuch geführt, welches sämtliche Transaktionen beinhaltet.</p>
 			<p>Im Gegensatz zu Bitcoin ist es bei <a href="https://www.ethereum.org/" target="_blank">Ethereum</a> möglich, mit sogenannten Smart-Contracts zu arbeiten, welche jeweils einer Logik folgen. So existiert die Logik für die beiden Tokens, allerdings auch die Logik für das Auslesen des Grünstrom-Indexes in der Blockchain von Ethereum.</p>
@@ -148,17 +172,26 @@
 			</ul>
 			</p>
 			<h3>Transparenz</h3>
-			<p>Diese Anwendung läuft in der öffentlichen Ethereum Blockchain und kann dadurch von jedem mit den entsprechenden Werkzeugen unabhängig von dieser Seite eingesehen werden.</p>
+			<p>Diese Anwendung läuft in der öffentlichen Ethereum Blockchain und kann dadurch von jedem mit den entsprechenden Werkzeugen unabhängig von dieser Seite eingesehen werden. Die Tokens können getauscht, gehandelt, umgewandelt werden.</p>
 			<p>
 			Die Verträge:
 			<ul>
 				<li><a href="http://etherscan.io/address/0xAF6D36e6A376CDa44a5Ce9280507e5E24132C143" target="_blank">Hauptvertrag GSI</a></li>
-				<li><a href="http://etherscan.io/address/0xA37fB386486D54555dfCE08fba0D96981eEa0020" target="_blank">Grünstrom Token</li>
-				<li><a href="http://etherscan.io/address/0x3116859945dDEBaD7eDb84109D069A41219d19f0" target="_blank">Graustrom Token</li>
+				<li><a href="http://etherscan.io/token/0xA37fB386486D54555dfCE08fba0D96981eEa0020" target="_blank">Grünstrom Token</a></li>
+				<li><a href="http://etherscan.io/token/0x70bcfbf17abe2d2c7bed8cdd72b160f39048fd23" target="_blank">Graustrom Token</a></li>
 			</ul>
+			<p>
+			Der Source-Code ist <a href="https://github.com/zoernert/gsi">auf GIT-Hub</a> einsehbar. Als Bestätigung, dass die verwendeten Verträge tatsächlich der Logik folgen wurden diese bei EtherScan validiert. 
 			</p>
+			</p>
+			<h2>Orakel:Automatische Zählerablesung (AMR)</h2>
 		</div>
 	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a>|<a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a>|<a href="https://github.com/zoernert/gsi">Source (GIT)</a></p>
+      </div>
+    </footer>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<!--<script src="js/app_loader.js"></script>-->

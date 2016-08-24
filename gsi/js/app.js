@@ -101,7 +101,8 @@ function updateRendition(name) {
 						},4000);
 									
 				});
-				$('.balance-green').html(r.c[0].format());				
+				$('.balance-green').html(r.c[0].format());	
+				$('#sendTokens').attr('placeholder',"Max: "+r.c[0]);
 			});	
 	}
 	if(name=="GreyToken") {
@@ -252,6 +253,12 @@ $(document).ready(
 				}
 				
 		});
+		$('#doSend').click(function() {
+				gsi.obj.GreenToken.transfer($('#sendTo').val(),$('#sendTokens').val(),{from:web3.eth.accounts[0],gas: 100000},
+					function(e,r) {
+						updateRendition('GSI');
+					});
+		});
 		$('#doRemView').click(function() {
 				gsi.address=$('#meterSelect').val();
 				resetCallStack();			
@@ -259,6 +266,9 @@ $(document).ready(
 		$('#swView').click(function() {
 			console.log("CLICK");
 			$('#selfView').toggle();$('#remView').toggle();
+		});
+		$('#loadETH').click(function() {
+			$('#loadINFO').toggle();
 		});
 		setInterval(function() {			
 			if((calls.length>1)&&(call_semaphore)) {				
