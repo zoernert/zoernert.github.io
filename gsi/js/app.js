@@ -76,6 +76,7 @@ function updateRendition(name) {
 	if(!gsi.address) {
 		gsi.address=web3.eth.accounts[0];
 	}
+	$('#loadETH').attr('href','https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39&address='+gsi.address);
 	chainCall(web3.eth.getBalance,[gsi.address],function(e,r) {$('#ethbalance').html(r.c[0]);});
 	
 	//$('#ethtx').html(Math.round(web3.eth.getBalance(gsi.address).c[0]/(gsi.gasRequired+8000)));
