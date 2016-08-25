@@ -147,6 +147,19 @@
 			<p>
 			Liegt das Zeitfenster zwischen den Ablesungen im Bereich von viel Graustrom, so erhält man Graustrom-Token.
 			</p>
+			<h3>Wert der Token</h3>
+			<p>
+			Selbstverständlich handelt ist der Wert hinter den beiden Tokens zunächst symbolisch für das Ereignis, welches bei der Erstellung manifestiert wird. 
+			</p>
+			<p>
+			Für Grünstrom-Token ist es die nachgewiesene Nutzung von Elektrizität aus dem öffentlichen Stromnetz zu Zeiten, bei denen...
+			<ul>
+				<li>... Einspeiung und Entnahme aus dem Netz vor allem <strong>lokal und regional</strong> ausbalanciert ist</li>
+				<li>... ein <strong>netzdienliches</strong> Nutzungsverhalten vorliegt</li>
+				<li>... <strong>Brennstoff arme</strong> Stromerzeugung besteht.</li>
+			</ul>
+			</p>
+			
 			<h2>Stromtoken als Crypto-Währungen</h2>
 			<h3>Blockchain</h3>
 			<p>Bei einer Blockchain handelt es sich um eine verteilte Datenbank welche zwischen allen Nutzern geteilt wird. In dieser Datenbank wird eine Art Kontenbuch geführt, welches sämtliche Transaktionen beinhaltet.</p>
@@ -185,11 +198,35 @@
 			</p>
 			</p>
 			<h2>Orakel:Automatische Zählerablesung (AMR)</h2>
+			<p>
+			Um Grünstrom und Graustrom-Token zu erhalten sind zwei Ablesungen im Abstand von minimal einer und maximal 24 Stunden notwendig. Dies kann generell manuell durch Eingabe in der Anwendung geschehen, es ist jedoch deutlich komfortabler, wenn die Ablesung der Stromzähler automatisiert erfolgt.
+			</p>
+			<h3>Messstellenbetreiber</h3>
+			<p>
+			Ein entscheidender Nachteil der manuellen Ablesung ist die Anzahl der Transaktionen, welche in die Blockchain geschrieben werden müssen. Als Messstellenbetreiber besteht die Möglichkeit ein sogenanntes "Orakel" zu werden, welche bestätige Ablesungen in Masse vornehmen kann.  
+			</p>			
+			<h4>Prozess zur Anmeldung als Orakel</h4>
+			<ol>
+			<li>Eintragung im <a href="http://etherscan.io/address/0xAF6D36e6A376CDa44a5Ce9280507e5E24132C143" target="_blank">GSI-Hauptvertrag</a> (GSI) durch den Besitzer des privaten Schlüssel ( <code>GSI.owner()</code> )</li>
+			<li>Übermittlung der Postleitzahl an <code>GSI.setPlz()</code> signiert durch privaten Schlüssel des Letzverbraucher</li>
+			<li>Anfangsstandübermittlung an <code>GSI.oracalizeReading()</code> als Transaktion, die mit dem privaten Schlüssel des Letzverbraucher signiert ist.</li>
+			<li>Direkte Verbuchung der Gutschriften über <code>GSI.mintGreen(address recipient,uint256 tokens)</code> bzw. <code>GSI.mintGrey(address recipient,uint256 tokens)</code></li>
+			</ol>
+			<h3>Heimautomatisierung</h3>
+			<p>
+			Bei der Integration des Grünstrom-Token in gängige Heimautomatisierungs-Lösungen kommt es darauf an, welche Programmierschnittstellen von dieser Lösung angeboten werden. 
+			</p>
+			<h4>Verwendung von NodeJS</h4>
+			Ist NodeJS vorhanden, so ist lediglich eine signierte Transaktion an die Funktion <code>GSI.oracalizeReading()</code> des GSI-Hauptvertrages zu senden. Es ist zu beachten, dass der Gaspreis für das manuelle Orakel mit zu senden ist.
+			<h4>Verwendung eines Gatewaysdienstes</h4>
+			<p>
+			Gatewaydienste haben den entscheidenden Nachteil, dass einige Vorteile einer dezentralen Anwendung geopfert werden müsen. Der Diensteanbieter bietet meist über eine gesicherte JSON Schnittstelle die Möglichkeit einen Zählerstand zu übermitteln. Das genaue Verfahren ist der API-Dokumentation des Gatewaydienstes zu entnehmen.
+			</p>
 		</div>
 	</div>
 	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
       <div class="container">
-        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a>|<a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a>|<a href="https://github.com/zoernert/gsi">Source (GIT)</a></p>
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
       </div>
     </footer>
     <script src="https://code.jquery.com/jquery.js"></script>
