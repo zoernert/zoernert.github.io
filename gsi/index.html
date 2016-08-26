@@ -120,8 +120,8 @@
 				<p>
 				Die Token sind aktuell bei EtherDelta gelistet, können allerdings auch alternativ bei jedem Exchange gehandelt werden, welcher den ERC-20 Standard unterstützt.
 				<ul>
-					<li><a href="https://etherdelta.github.io/#P+-ETH" target="_blank">Grünstrom-Token (P+) gegen Ether (ETH)</a></li>
-					<li><a href="https://etherdelta.github.io/#P+-0x70bcfbf17abe2d2c7bed8cdd72b160f39048fd23" target="_blank">Grünstrom-Token (P+) gegen Graustrom-Token (P-)</a></li>
+					<li><a href="https://etherdelta.github.io/#0x55E7C4a77821d5C50B4570b08F9f92896a25E012-ETH" target="_blank">Grünstrom-Token (P+) gegen Ether (ETH)</a></li>
+					<li><a href="https://etherdelta.github.io/#0x55E7C4a77821d5C50B4570b08F9f92896a25E012-0x28d5113fb69CCad891cB1F88530b7bcf44225da6" target="_blank">Grünstrom-Token (P+) gegen Graustrom-Token (P-)</a></li>
 				</ul>
 				</p>
 		</div>
@@ -197,9 +197,9 @@
 			<p>
 			Die Verträge:
 			<ul>
-				<li><a href="http://etherscan.io/address/0xAF6D36e6A376CDa44a5Ce9280507e5E24132C143" target="_blank">Hauptvertrag GSI</a></li>
-				<li><a href="http://etherscan.io/token/0x19e035fae8230982349f65e461c52ef47da89013" target="_blank">Grünstrom Token</a></li>
-				<li><a href="http://etherscan.io/token/0x70bcfbf17abe2d2c7bed8cdd72b160f39048fd23" target="_blank">Graustrom Token</a></li>
+				<li><a href="http://etherscan.io/address/0xCE3b5fFca16ffF926c890f0885A3e90cEb89db0A" target="_blank">Hauptvertrag GSI</a></li>
+				<li><a href="http://etherscan.io/token/0x55E7C4a77821d5C50B4570b08F9f92896a25E012" target="_blank">Grünstrom Token</a></li>
+				<li><a href="http://etherscan.io/token/0x28d5113fb69CCad891cB1F88530b7bcf44225da6" target="_blank">Graustrom Token</a></li>
 			</ul>
 			<p>
 			Der Source-Code ist <a href="https://github.com/zoernert/gsi">auf GIT-Hub</a> einsehbar. Als Bestätigung, dass die verwendeten Verträge tatsächlich der Logik folgen wurden diese bei EtherScan validiert. 
@@ -215,7 +215,7 @@
 			</p>			
 			<h4>Prozess zur Anmeldung als Orakel</h4>
 			<ol>
-			<li>Eintragung im <a href="http://etherscan.io/address/0xAF6D36e6A376CDa44a5Ce9280507e5E24132C143" target="_blank">GSI-Hauptvertrag</a> (GSI) durch den Besitzer des privaten Schlüssel ( <code>GSI.owner()</code> )</li>
+			<li>Eintragung im <a href="http://etherscan.io/address/0xCE3b5fFca16ffF926c890f0885A3e90cEb89db0A" target="_blank">GSI-Hauptvertrag</a> (GSI) durch den Besitzer des privaten Schlüssel ( <code>GSI.owner()</code> )</li>
 			<li>Übermittlung der Postleitzahl an <code>GSI.setPlz()</code> signiert durch privaten Schlüssel des Letzverbraucher</li>
 			<li>Anfangsstandübermittlung an <code>GSI.oracalizeReading()</code> als Transaktion, die mit dem privaten Schlüssel des Letzverbraucher signiert ist.</li>
 			<li>Direkte Verbuchung der Gutschriften über <code>GSI.mintGreen(address recipient,uint256 tokens)</code> bzw. <code>GSI.mintGrey(address recipient,uint256 tokens)</code></li>
@@ -236,6 +236,14 @@
 			</p>
 			<p>
 			Ein dezentraler Ansatz wurde für maximale Unabhängigkeit des gesamten Systems gewählt. Sowohl Unabhängigkeit von ITK-Umgebungen als auch von einzelnen Anbietern (Hostern, Dienstleister). Das System besteht funktional weiter, selbst wenn eine Komponente des Systems nicht mehr verfügbar ist. Stellt ein Energieversorger, oder ein Messtellenbetreiber seine Geschäftstätigkeit ein, so können von den Letztverbrauchern weiterhin alle Operationen (Handelstätigkeiten) mit den bereits im Besitz befindlichen Tokens durchführen, die auch vorher durchführbar gewesen sind.
+			</p>
+			<h3>IPFS Nutzung</h3>
+			<p>
+			Bei <a href="https://ipfs.io/" target="_blank">IPFS</a> handelt es sich um eine öffentliche, dezentrale Dateiablage.Über diese Ablage wird mit dem Hashcode <a href="https://gateway.ipfs.io/ipns/QmV8LR5p6r8N9gg1N3RKrjK5B4uRue3RJm9atRypwWHmTW/" target="_blank">QmV8LR5p6r8N9gg1N3RKrjK5B4uRue3RJm9atRypwWHmTW</a> sowohl diese Seite als auch der <a href="https://gateway.ipfs.io/ipns/QmV8LR5p6r8N9gg1N3RKrjK5B4uRue3RJm9atRypwWHmTW/src/" target="_blank">Source-Code</a> bereitgestellt.
+			</p>
+			<h3>Orakel</h3>
+			<p>
+			Die Ausgabe von Tokens und die damit verbundene Verknüpfung von GrünstromIndex und Zählerstand wird durch den Smart-Contract kontrolliert. Mehrere Orakel können parallel oder getrennt nach Zuständigkeit arbeiten. Sichergestellt wird, dass ein Zählerstandsgang jeweils nur einmal verarbeitet wird. 
 			</p>
 		</div>
 	</div>
