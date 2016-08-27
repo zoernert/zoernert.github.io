@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Grünstrom - Token</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+	<script>
+	 google.charts.load('current', {'packages':['corechart']});
+	</script>
+  </head>
+  <body>
+    <div class="container" id="app_content">
+		
+		<div class="row">
+			<h1 id="tktitle">GrünStromIndex-Token</h1>			
+		</div>
+		
+		<div class="row" style="background-color:green;color:white">
+		<h3>&nbsp;<span class="glyphicon glyphicon-leaf">&nbsp;</span><span class="balance-green"></span> Grünstrom Token</h3>
+		</div>
+		<div class="row" style="background-color:gray;color:white">
+		<h3>&nbsp;<span class="glyphicon glyphicon-fire">&nbsp;</span><span class="balance-gray"></span> Graustrom Token</h3>
+		</div>
+			<div class="row" style="border-top:1px solid #303030">			
+				<div id="selfView">
+				<h3>Zählerstand aktualisieren</h3>
+				<form class="form-inline" onsubmit="return false;">
+				  <div class="form-group">
+						<label class="sr-only" for="requestedReading">Zählerstand in Watt-Stunden</label>			
+						<div class="input-group">
+						
+						  <input type="number" class="form-control" id="requestedReading" placeholder="Aktueller Zählerstand">
+						
+						  <div class="input-group-addon">Wh</div>
+						</div>
+					
+			
+						<label class="sr-only" for="requestedPLZ">Postleitzahl</label>
+						<div class="input-group">
+							<div class="input-group-addon">Postleitzahl</div>
+							<input type="txt" class="form-control" id="requestedPLZ" placeholder="Postleitzahl">
+						</div>
+
+					<button type="submit" class="btn btn-primary" id="doRequest">Aktualisieren</button>
+				  </div>
+				</form>
+				</div>
+				<div id="remView" style="display:none">
+				    <h3>Zähler anzeigen</h3>
+					<form class="form-inline" onsubmit="return false;">
+						<label class="sr-only" for="meterSelect">Fremdzähler</label>
+						<div class="input-group">
+							<div class="input-group-addon"><span class="glyphicon glyphicon-sunglasses"></span></div>
+							<input type="txt" class="form-control" id="meterSelect" placeholder="Ethereum Adresse Stromzähler">
+						</div>
+						<button type="submit" class="btn btn-primary" id="doRemView">Öffnen</button>
+					</form>
+				</div>					
+		</div>
+		<div class="row" id="alerter">
+		</div>
+				
+		<hr/>
+		<div class="row">
+			<h3>Handel/Transfer</h3>
+			    <h4>Transfer Grünstrom-Token</h4>
+				<form class="form-inline" onsubmit="return false;">				
+				  <div class="form-group">
+						<label class="sr-only" for="sendTokens">Grüntoken Versenden</label>			
+						<div class="input-group">
+						
+						  <input type="number" class="form-control" id="sendTokens" placeholder="Anzahl der Grünstrom-Tokens">
+						
+						  <div class="input-group-addon">P+</div>
+						</div>
+					
+			
+						<label class="sr-only" for="sendTo">Empfänger (Account)</label>
+						<div class="input-group">
+							<div class="input-group-addon">Account</div>
+							<input type="txt" class="form-control" id="sendTo" placeholder="Empfänger (0x123...)">
+						</div>
+
+					<button type="submit" class="btn btn-primary" id="doSend">versenden</button>
+				  </div>
+				</form>				
+		</div>	
+	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--<script src="js/app_loader.js"></script>-->
+	<script src="js/app.js"></script>
+  </body>
+</html>
