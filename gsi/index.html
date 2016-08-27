@@ -124,6 +124,7 @@
 					<li><a href="https://etherdelta.github.io/#0x55E7C4a77821d5C50B4570b08F9f92896a25E012-0x28d5113fb69CCad891cB1F88530b7bcf44225da6" target="_blank">Grünstrom-Token (P+) gegen Graustrom-Token (P-)</a></li>
 				</ul>
 				</p>
+				
 		</div>
 		<hr/>
 		<div class="row" id="txchartrow" style="display:none">
@@ -244,6 +245,26 @@
 			<h3>Orakel</h3>
 			<p>
 			Die Ausgabe von Tokens und die damit verbundene Verknüpfung von GrünstromIndex und Zählerstand wird durch den Smart-Contract kontrolliert. Mehrere Orakel können parallel oder getrennt nach Zuständigkeit arbeiten. Sichergestellt wird, dass ein Zählerstandsgang jeweils nur einmal verarbeitet wird. 
+			</p>
+			<h2>Datenschutz</h2>
+			<p>
+				Der Grünstrom-Index und dessen Tokens werden in der öffentlichen Blockchain verarbeitet. Für die Funktion ist es notwendig, dass der Anwender den privaten Schlüssel für eine Adresse in der Blockchain besitzt. Der private Schlüssel wird direkt auf dem Rechner des Anwender erstellt und sollte diesen niemals verlassen.
+			</p>
+			<p>
+				Jegliche Transaktion, die in die Blockchain geschrieben wird, muss mit einem privaten Schlüssel <em>signiert</em> werden. Damit kann nachgewiesen werden, dass die Absendeadresse (0x12345...) eindeutig ist. 
+			</p>
+			<p>
+				Ausgehend vom Anwender werden in der Blockchain folgende Daten verknüpft:
+				<ul>
+				<li>Blockchain-Addresse zu Postleitzahl</li>
+				<li>Blockchain-Addresse zu Zählerstand</li>
+				<li>Anzahl der Grünstrom-Token</li>
+				<li>Anzahl der Graustrom-Token</li>
+				</ul>
+				Welche tatsächliche Person oder welcher Stromzähler sich tatsächlich hinter der Blockchain-Adresse verbirgt ist nicht einsehbar. Zu keinem Zeitpunkt werden Name oder andere Personalien erhoben.
+			</p>
+			<p>
+				Eingeschränkt  wird dieses hohe Niveau des Datenschutzes, wenn ein AMR (Automatische Zählerablesung) zum Einsatz kommt. In diesem Fall sind dem Anbieter der Ablesung eine Zuordnung zwischen Zähler und Blockchain-Adresse bekannt. Entsprechende Dienstleister müssen daher einen geeigneten Schutz vor unberechtigtem Zugriff auf diese Daten implementieren. 
 			</p>
 		</div>
 	</div>
