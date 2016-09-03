@@ -1,0 +1,17 @@
+{
+  "name": "gsi-mobile",
+  "version": "1.0.0",
+  "description": "",
+  "main": "example_usage.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Thorsten Zoerner <me@thorsten-zoerner.com> (https://blog.stromhaltig.de)",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.0.1",
+    "ethers-wallet": "^1.0.2",
+    "hooked-web3-provider": "^1.0.0",
+    "web3": "^0.16.0"
+  }
+}

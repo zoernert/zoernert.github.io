@@ -1,0 +1,236 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gr&uuml;nStromJeton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	
+	<script type="text/javascript" src="https://rawgit.com/ethers-io/ethers-wallet/master/dist/ethers-wallet.min.js"></script>
+	
+	
+	<!--
+    <script type="text/javascript" src="./node_modules/web3/dist/web3.js"></script>
+    
+    <script type="text/javascript" src="./node_modules/async/dist/async.js"></script> 	
+	-->
+  </head>
+  <body>
+    <div class="container" id="app_content">
+		
+		<div class="row" style="margin-bottom:10px;border-bottom:1px solid #303030">
+			<h1 id="tktitle"><span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span></h1>		
+			<span style="float:right;color:#909090"><em>mit nachgewiesener Nutzung von lokalem Wind-,Wasser-,Sonnenstrom die Energiewende meistern.</em></span>
+		</div>
+
+		<div id="openWallet" style="display:none">
+		
+			<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-success">
+				  <div class="panel-heading">
+					<h3 class="panel-title">Gr&uuml;nStrom</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2><span class="glyphicon glyphicon-leaf">&nbsp;</span><span class="balance-green"></span> Jetons</h2>
+				  </div>
+				 </div>				
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+					<h3 class="panel-title">GrauStrom</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2><span class="glyphicon glyphicon-fire">&nbsp;</span><span class="balance-gray"></span> Jetons</h2>
+				  </div>
+				 </div>				
+			</div>
+			</div>
+			<div class="row" id="alerter" style="display:none"><div class="col-md-12">
+				<div class="panel panel-danger">
+					<table class="table" id="logTab">							
+					</table>
+				</div>
+			</div></div>
+			<div class="row">			
+				<div class="col-md-12">
+				<div class="panel panel-info">
+				<div class="panel-heading">
+					<h3 class="panel-title">Z&auml;hlerstand aktualisieren</h3>
+				  </div>
+				  <div class="panel-body">			
+				  <img style="float:right;display:none" src="" id="gsiimg"/>
+					<form class="form-inline" onsubmit="return false;">
+						<div class="form-group">
+						<label class="sr-only" for="requestedReading">Z&auml;hlerstand in Watt-Stunden</label>			
+						<div class="input-group">
+						
+						  <input type="number" class="form-control" id="requestedReading" placeholder="Aktueller Z&auml;hlerstand">
+						
+						  <div class="input-group-addon">Wh</div>
+						</div>
+					
+			
+						<label class="sr-only" for="requestedPLZ">Postleitzahl</label>
+						<div class="input-group">
+							<div class="input-group-addon">Postleitzahl</div>
+							<input type="txt" class="form-control" id="requestedPLZ" placeholder="Postleitzahl">
+						</div>
+
+					<button type="submit" class="btn btn-primary" id="doRequest">Aktualisieren</button>
+				  </div>
+					</form><br/>
+					<p><strong>Hinweis:</strong><br/>Wenden Sie sich an Ihren Messstellenbetreiber, um eine automatische Ablesung (AMR) eines SmartMeters zu erhalten. Die Eingabe eines Zählerstandes ist dann nicht mehr erforderlich für die Gutschrift von Jetons.</p>
+					<p>Für den Erhalt von Jetons sind mindestens 2 Ablesungen innerhalb von 24 Stunden notwendig.</p>
+					</div>
+				</div>						
+			</div>			
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h4 class="panel-title">Ihre Zähleradresse</h4>
+						</div>
+					  <div class="panel-body">					  				
+						<h3>&nbsp;<span class="glyphicon glyphicon-scale">&nbsp;</span><span class="gsiactive"></span></h3>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h4 class="panel-title">Guthaben für Transaktionen</h4>
+						</div>
+					  <div class="panel-body">					  				
+						<h3>&nbsp;<span class="glyphicon glyphicon-asterisk">&nbsp;</span><span id="ethbalance"></span> WEI (Gas) <a href="" id="loadETH" class="btn btn-warning" target="_blank">aufladen</a></h3>
+						</div>
+					</div>
+				</div>				
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">Transferieren von Jetons</h3>
+						</div>
+						<ul class="list-group">
+							<li class="list-group-item"><h4>Überweisen - Grünstrom</h4>
+							<form class="form-inline" onsubmit="return false;">				
+							  <div class="form-group">
+									<label class="sr-only" for="sendTokens">Gr&uuml;ntoken Versenden</label>			
+									<div class="input-group">
+									
+									  <input type="number" class="form-control" id="sendTokens" placeholder="Anzahl der Gr&uuml;nstrom-Tokens">
+									
+									  <div class="input-group-addon">P+</div>
+									</div>
+								
+						
+									<label class="sr-only" for="sendTo">Empf&auml;nger (Account)</label>
+									<div class="input-group">
+										<div class="input-group-addon">Adresse</div>
+										<input type="txt" class="form-control" id="sendTo" placeholder="Empf&auml;nger (0x123...)">
+									</div>
+
+								<button type="submit" class="btn btn-primary" id="doSend">versenden</button>
+							  </div>
+							</form>	
+							</li>
+							<li class="list-group-item"><h4>Handel/Tausch</h4>
+								<p>
+									Die Gr&uuml;nstrom- und Graustromjetons folgen dem <a href="https://github.com/ethereum/EIPs/issues/20" target="_blank">ERC-20 Standard</a> für Ethereum-Tokens und sind daher überall frei verwendbar, wo dieser Standard unterstützt wird.
+								</p>
+								<table class="table">
+									<tr><td>Grünstrom</td><td><a href="http://etherscan.io/token/0x55e7c4a77821d5c50b4570b08f9f92896a25e012" target="_blank">0x55e7c4a77821d5c50b4570b08f9f92896a25e012</a></td></tr>
+									<tr><td>Graustrom</td><td><a href="http://etherscan.io/token/0x28d5113fb69ccad891cb1f88530b7bcf44225da6" target="_blank">0x28d5113fb69ccad891cb1f88530b7bcf44225da6</a></td></tr>
+								</table>
+								<p>
+								Dezentrale Handelsplattform EtherDelta:
+								<ul>
+									<li><a href="https://etherdelta.github.io/#0x55e7c4a77821d5c50b4570b08f9f92896a25e012-ETH" target="_blank">Grünstrom - Ether</a></li>
+									<li><a href="https://etherdelta.github.io/#0x55e7c4a77821d5c50b4570b08f9f92896a25e012-0x28d5113fb69ccad891cb1f88530b7bcf44225da6" target="_blank">Grünstrom - Graustrom</a></li>
+								</ul>
+								</p>
+							</li>
+							<li class="list-group-item"><h4>Empfangen</h4>
+								Zum Empfang von Jetons genügt die Angabe Ihrer Zähleradresse:<br/>
+								<strong id="recAddr"></strong>
+							</li>
+						</ul>												
+					</div>			
+				</div>
+			</div>			
+		</div> <!-- /openWallet -->
+		<div id="closedWallet" style="display:none">
+		
+		<div class="panel panel-success">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Konto öffnen</h3>
+		  </div>
+		   <ul class="list-group">
+					<li class="list-group-item" id="hasID"><h4>Letzter Zähler</h4>	
+							<form class="form-inline" onsubmit="return false;">
+							<div class="input-group">
+							  <div class="input-group-addon"><span class="glyphicon glyphicon-scale"></div>
+							  <input type="text" class="form-control" id="seedIn" disabled="true" placeholder="0x1234.." style="width:360px;">
+							</div>
+							<button type="submit" class="btn btn-primary" id="doOpen" style="min-width:110px;">&ouml;ffnen</button>
+							</form>
+					</li>
+					<li class="list-group-item"><h4>Zähler Importieren</h4>					
+						<p>Von Ihrem Messstellenbetreiber (meist Netzbetreiber) erhalten Sie einen privaten Zugriffsschlüssel für Ihren Zähler, mit dem Sie Zugriff auf Ihr persönliches <span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span> Konto haben.</p>
+						´	<form class="form-inline" onsubmit="return false;">
+							<div class="input-group">
+							  <div class="input-group-addon"><span class="glyphicon glyphicon-lock"></div>
+							  <input type="text" class="form-control" id="keyIn" placeholder="0x1234.." style="width:360px;">
+							</div>
+							<button type="submit" class="btn btn-primary" id="doImport" style="min-width:110px;">importieren</button>					
+							</form>							
+					</li>
+					<li class="list-group-item"><h4>Neuen Zähler anlegen</h4>
+					
+						<div>
+							<p><strong>Hinweis:</strong><br/>
+							Es wird automatisch eine neue Z&auml;hleraddresse erstellt.</p>
+							<p>Der Zugriffsschl&uuml;ssel wird in diesem Browser gespeichert! Diese Option sollte <strong>nur</strong> gewählt werden, wenn Sie keinen Zugriffsschlüssel von Ihrem Messstellenbetreiber bekommen haben, oder einen nicht geeichten Zähler (zum Beispiel aus der Heimautomatisierung) verwenden möchten.
+							</p>				
+							<p>
+							Für das Schreiben der Transaktionen in die Blockchain fallen geringe Netzgebühren (Gas) an, wodurch eine Aufladung vor der Nutzung mit Guthaben (Ether) notwendig ist.
+							</p>
+						</div>	
+						<button type="submit" class="btn btn-primary" id="doNew" style="min-width:110px;">Neu</button>
+					</li>					
+			</ul>
+		</div>
+				<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Wichtige Informationen</h3>
+		  </div>
+		   <ul class="list-group">
+					<li class="list-group-item" id="hasID"><h4>Datenschutz</h4>
+					<p>Zur Verwaltung Ihres <span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span> Konto werden keine persönlichen Daten (Name, Anschrift, Telefonnummer,...) benötigt. Ausnahme ist die Postleitzahl, welche verwendet wird, um den Anteil von Strom aus Windkraft/Sonnenenergie zu einem bestimmten Zeitpunkt zu ermitteln. Die Postleitzahl wird mit der Zähleradresse (0x...) verknüpft verarbeitet, wodurch jedoch ohne weitere Information keine Rückschlüsse auf Ihre Identität möglich ist.</p>
+					<p>Diese Seite kann auf einem beliebigen Webserver abgelegt werden. Sollten Sie unsicher sein, ob die von Ihnen verwendete Version zusätzliche Informationen protokolliert und auswertet, so wenden Sie sich bitte an den Serverbetreiber oder konsultieren Sie dessen Datenschutzinformation.</p> 
+					</li>
+					<li class="list-group-item" id="hasID"><h4>Funktion  <span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span></h4>
+					<p>Die Jetons dienen als Nachweis für den Bezug von elektrischer Energie aus dem öffentlichen Stromnetz zu Zeiten eines hohen Dargebots von Windkraft, Sonnenenergie und Wasserkraft im unmittelbaren räumlichen Umfeld.</p>
+					<p>Durch die Verwendung von mindestens zwei Zählerständen innerhalb von 24 Stunden werden die Jetons automatisch gutgeschrieben.</p>
+					<p>Nach der Gutschrift können Jetons gehandelt, getauscht oder transferiert werden.</p>
+					</li>
+			</ul>
+			</div>
+		</div>
+	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>			
+	<script type="text/javascript" src="https://rawgit.com/ethers-io/ethers-wallet/master/dist/ethers-wallet.min.js"></script>
+	
+	<script src="js/app.js"></script>
+  </body>
+</html>

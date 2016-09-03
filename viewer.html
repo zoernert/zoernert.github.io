@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gr&uuml;nStromJeton - Viewer</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	
+	<script type="text/javascript" src="https://rawgit.com/ethers-io/ethers-wallet/master/dist/ethers-wallet.min.js"></script>
+	
+	
+	<!--
+    <script type="text/javascript" src="./node_modules/web3/dist/web3.js"></script>
+    
+    <script type="text/javascript" src="./node_modules/async/dist/async.js"></script> 	
+	-->
+  </head>
+  <body>
+    <div class="container" id="app_content">
+		
+		<div class="row" style="margin-bottom:10px;border-bottom:1px solid #303030">
+			<h1 id="tktitle"><span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span> - Viewer</h1>		
+			<span style="float:right;color:#909090"><em>mit nachgewiesener Nutzung von lokalem Wind-,Wasser-,Sonnenstrom die Energiewende meistern.</em></span>
+		</div>
+
+		<div id="openWallet" style="display:none">
+		
+			<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-success">
+				  <div class="panel-heading">
+					<h3 class="panel-title">Gr&uuml;nStrom</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2><span class="glyphicon glyphicon-leaf">&nbsp;</span><span class="balance-green"></span> Jetons</h2>
+				  </div>
+				 </div>				
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-default">
+				  <div class="panel-heading">
+					<h3 class="panel-title">GrauStrom</h3>
+				  </div>
+				  <div class="panel-body">
+					<h2><span class="glyphicon glyphicon-fire">&nbsp;</span><span class="balance-gray"></span> Jetons</h2>
+				  </div>
+				 </div>				
+			</div>
+			</div>
+			<div class="row" id="alerter" style="display:none"><div class="col-md-12">
+				<div class="panel panel-danger">
+					<table class="table" id="logTab">							
+					</table>
+				</div>
+			</div></div>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h4 class="panel-title">Zählerinformation</h4>
+						</div>
+					  <div class="panel-body">					  				
+						<h3>&nbsp;<span class="glyphicon glyphicon-scale">&nbsp;</span><span class="gsiactive"></span></h3>
+						<img style="float:left;display:none;margin-right:5px;" src="" id="gsiimg"/>
+						<label class="sr-only" for="requestedReading">Z&auml;hlerstand in Watt-Stunden</label>			
+						<div class="input-group">
+							<div class="input-group-addon" style="min-width:150px">Zählerstand</div>
+							<input type="number" class="form-control" disabled="true" id="requestedReading" placeholder="Aktueller Z&auml;hlerstand">
+						  <div class="input-group-addon">Wh</div>
+						</div>
+						<label class="sr-only" for="requestedPLZ">Postleitzahl</label>
+						<div class="input-group">
+							<div class="input-group-addon" style="min-width:150px">Postleitzahl</div>
+							<input type="txt" class="form-control" id="requestedPLZ" disabled="true" placeholder="Postleitzahl">
+						</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="panel panel-warning">
+						<div class="panel-heading">
+							<h4 class="panel-title">Guthaben für Transaktionen</h4>
+						</div>
+					  <div class="panel-body">					  				
+						<h3>&nbsp;<span class="glyphicon glyphicon-asterisk">&nbsp;</span><span id="ethbalance"></span> WEI (Gas) <a href="" id="loadETH" class="btn btn-warning" target="_blank">aufladen</a></h3>
+						</div>
+					</div>
+							<div class="panel panel-info">
+							  <div class="panel-heading">
+								<h3 class="panel-title">Konto wechseln</h3>
+							  </div>
+							   <ul class="list-group">
+										<li class="list-group-item" id="hasID"><h4>Zähler (Adresse) anzeigen</h4>	
+												<form class="form-inline" onsubmit="return false;">
+												<div class="input-group">
+												  <div class="input-group-addon"><span class="glyphicon glyphicon-scale"></div>
+												  <input type="text" class="form-control" id="seedSwitch" placeholder="0x1234.." >
+												</div>
+												<button type="submit" class="btn btn-primary" id="doSwitch" style="min-width:110px;">&ouml;ffnen</button>
+												</form>
+										</li>
+								</ul>
+							</div>
+				</div>				
+			</div>			
+		</div> <!-- /openWallet -->
+		<div id="closedWallet" style="display:none">
+		
+		<div class="panel panel-success">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Konto öffnen</h3>
+		  </div>
+		   <ul class="list-group">
+					<li class="list-group-item" id="hasID"><h4>Zähler (Adresse) anzeigen</h4>	
+							<form class="form-inline" onsubmit="return false;">
+							<div class="input-group">
+							  <div class="input-group-addon"><span class="glyphicon glyphicon-scale"></div>
+							  <input type="text" class="form-control" id="seedIn" placeholder="0x1234.." style="width:360px;">
+							</div>
+							<button type="submit" class="btn btn-primary do" id="doOpen" style="min-width:110px;">&ouml;ffnen</button>
+							</form>
+					</li>
+			</ul>
+		</div>
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+			<h3 class="panel-title">Wichtige Informationen</h3>
+		  </div>
+		   <ul class="list-group">
+					<li class="list-group-item" id="hasID"><h4>Datenschutz</h4>
+					<p>Zur Verwaltung Ihres <span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span> Konto werden keine persönlichen Daten (Name, Anschrift, Telefonnummer,...) benötigt. Ausnahme ist die Postleitzahl, welche verwendet wird, um den Anteil von Strom aus Windkraft/Sonnenenergie zu einem bestimmten Zeitpunkt zu ermitteln. Die Postleitzahl wird mit der Zähleradresse (0x...) verknüpft verarbeitet, wodurch jedoch ohne weitere Information keine Rückschlüsse auf Ihre Identität möglich ist.</p>
+					<p>Diese Seite kann auf einem beliebigen Webserver abgelegt werden. Sollten Sie unsicher sein, ob die von Ihnen verwendete Version zusätzliche Informationen protokolliert und auswertet, so wenden Sie sich bitte an den Serverbetreiber oder konsultieren Sie dessen Datenschutzinformation.</p> 
+					</li>
+					<li class="list-group-item" id="hasID"><h4>Funktion  <span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span></h4>
+					<p>Die Jetons dienen als Nachweis für den Bezug von elektrischer Energie aus dem öffentlichen Stromnetz zu Zeiten eines hohen Dargebots von Windkraft, Sonnenenergie und Wasserkraft im unmittelbaren räumlichen Umfeld.</p>
+					<p>Durch die Verwendung von mindestens zwei Zählerständen innerhalb von 24 Stunden werden die Jetons automatisch gutgeschrieben.</p>
+					<p>Nach der Gutschrift können Jetons gehandelt, getauscht oder transferiert werden.</p>
+					</li>
+			</ul>
+			</div>
+		</div>
+	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>			
+	<script type="text/javascript" src="https://rawgit.com/ethers-io/ethers-wallet/master/dist/ethers-wallet.min.js"></script>
+	
+	<script src="js/app_viewer.js"></script>
+  </body>
+</html>
