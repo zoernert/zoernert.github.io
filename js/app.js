@@ -113,7 +113,11 @@ function openingWallet() {
 		});
 	});
 	$('#doSend').click(function() {
-		gsi.obj.greenToken.transfer($('#sendTo').val(),$('#sendTokens').val()*1).then(function(e) {
+		var options = {
+			gasLimit: 3000000,
+			gasPrice: "0x1000",
+		};
+		gsi.obj.greenToken.transfer($('#sendTo').val(),$('#sendTokens').val()*1,options).then(function(e) {
 			addLogMsg('info','<strong>Transaktion '+e+' gesendet.</strong><br/> Der Status der Verarbeitung kann bei <a href="http://etherscan.io/tx/'+e+'" target="_blank">Etherscan.io</a> kontrolliert werden.');
 			$('#sendTo').val("");
 			$('#sendTokens').val("");
