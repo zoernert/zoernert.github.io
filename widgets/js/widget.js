@@ -31,7 +31,7 @@ function openingWallet() {
 	$.getJSON("./js/current.deployment.json",function(data) {
 		gsi.deployment=data;	
 		$('#loadETH').attr('href','https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39&address='+gsi.address);	
-		$('#recAddr').html(gsi.address);
+		$('.recAddr').html(gsi.address);
 		$.getJSON("./build/GSI.abi",function(abi_code) {
 			gsi.obj.GSI = gsi.wallet.getContract(gsi.deployment.gsi,abi_code);
 			$.getJSON("./build/GSIToken.abi",function(token_abi) {
@@ -121,7 +121,9 @@ function sekeletonGreenBanlance() {
 function sekeletonGreyBanlance() {	
 	return skeletonWidget('Guthaben GrauStrom','panel-default','<h2><span class="glyphicon glyphicon-fire">&nbsp;</span><span class="balance-grey"></span> Jetons</h2>');
 }
-
+function sekeletonAccountBanlance() {	
+	return skeletonWidget('&Ouml;ffentliche Z&auml;hleradresse','panel-default','<p><span class="recAddr"></span></p>');
+}
 function sekeletonMixBanlance() {	
 	return skeletonWidget('Gr&uuml;nStrom Bilanz (Entnahme)','panel-success','<div class="progress"><div class="progress-bar mixbar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""width: 0%;">0%</div></div>');
 }
@@ -137,7 +139,10 @@ $(document).ready(
 		}
 		if($_GET("a")) {		
 			gsi.address=$_GET("a");
-		}				
+		}		
+		if($_GET("bg")) {
+			$("body").css('background-color','#'+$_GET("bg"));
+		}
 		unlockedWallet();		
 		widgets=[];
 		if($_GET("w")) {
@@ -154,6 +159,7 @@ $(document).ready(
 			if(widgets[i]=="green") { html+=sekeletonGreenBanlance(); }
 			if(widgets[i]=="grey") { html+=sekeletonGreyBanlance(); }
 			if(widgets[i]=="mix") { html+=sekeletonMixBanlance(); }			
+			if(widgets[i]=="account") { html+=sekeletonAccountBanlance(); }			
 		}
 		$('#widgets_content').html(html);
 	}	
