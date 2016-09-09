@@ -1,7 +1,4 @@
-﻿var call_delay=10000;
-var lending_contract='0x9707F3C9ca3C554A6E6d31B71A3C03d7017063F4';
-
-Number.prototype.format = function(n, x) {
+﻿Number.prototype.format = function(n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
     return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$&.');
 };
