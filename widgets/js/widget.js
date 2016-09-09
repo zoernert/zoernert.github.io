@@ -123,7 +123,7 @@ function sekeletonGreyBanlance() {
 }
 
 function sekeletonMixBanlance() {	
-	return skeletonWidget('Gr&uuml;nStrom Verbrauchsbilanz','panel-success','<div class="progress"><div class="progress-bar mixbar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""width: 0%;">0%</div></div>');
+	return skeletonWidget('Gr&uuml;nStrom Bilanz (Entnahme)','panel-success','<div class="progress"><div class="progress-bar mixbar progress-bar-success" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style=""width: 0%;">0%</div></div>');
 }
 $(document).ready( 
 	function() {
