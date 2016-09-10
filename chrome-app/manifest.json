@@ -1,0 +1,16 @@
+﻿{
+  "name": "GrünStromJeton",
+  "description": "SmartMeter in der Ethereum Blockchain",
+  "version": "0.1",
+  "manifest_version": 2,
+  "app": {
+    "background": {
+      "scripts": ["background.js"]
+    }
+  },
+  "permissions": [
+          "storage"
+  ],
+  "content_security_policy": "img-src 'self' http://mix.stromhaltig.de* object-src 'self'",
+  "icons": { "16": "greenpower_16.png", "128": "greenpower_128.png" }
+}

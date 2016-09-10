@@ -53,8 +53,15 @@ function openingWallet() {
 										$('.mixbar').width(p+"%");
 										console.log("%",p);
 									});
+									gsi.obj.greyToken.totalSupply().then(function(v) {
+										$('.totalGrey').html(	(v.toString()*1).format());												
+									});
 							});	
 						});
+						gsi.obj.greenToken.totalSupply().then(function(v) {
+							$('.totalGreen').html(	(v.toString()*1).format());													
+						});
+						
 				});	
 			
 				//mixbar
@@ -121,6 +128,13 @@ function sekeletonGreenBanlance() {
 function sekeletonGreyBanlance() {	
 	return skeletonWidget('Guthaben GrauStrom','panel-default','<h2><span class="glyphicon glyphicon-fire">&nbsp;</span><span class="balance-grey"></span> Jetons</h2>');
 }
+function sekeletonGreenTotal() {	
+	return skeletonWidget('Gesamt Gr&uuml;nStrom','panel-success','<h2><span class="glyphicon glyphicon-leaf">&nbsp;</span><span class="totalGreen"></span> Jetons</h2>');
+}
+function sekeletonGreyTotal() {	
+	return skeletonWidget('Gesamt GrauStrom','panel-default','<h2><span class="glyphicon glyphicon-fire">&nbsp;</span><span class="totalGrey"></span> Jetons</h2>');
+}
+
 function sekeletonAccountBanlance() {	
 	return skeletonWidget('&Ouml;ffentliche Z&auml;hleradresse','panel-default','<p><span class="recAddr"></span></p>');
 }
@@ -159,7 +173,9 @@ $(document).ready(
 			if(widgets[i]=="green") { html+=sekeletonGreenBanlance(); }
 			if(widgets[i]=="grey") { html+=sekeletonGreyBanlance(); }
 			if(widgets[i]=="mix") { html+=sekeletonMixBanlance(); }			
-			if(widgets[i]=="account") { html+=sekeletonAccountBanlance(); }			
+			if(widgets[i]=="account") { html+=sekeletonAccountBanlance(); }	
+			if(widgets[i]=="totalgreen") { html+=sekeletonGreenTotal();}
+			if(widgets[i]=="totalgrey") { html+=sekeletonGreyTotal();}
 		}
 		$('#widgets_content').html(html);
 	}	

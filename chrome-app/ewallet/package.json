@@ -1,0 +1,48 @@
+{
+  "name": "ethers-wallet",
+  "version": "1.0.2",
+  "description": "Ethereum wallet library.",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/nodeunit tests/index.js",
+    "version": "grunt dist"
+  },
+  "dependencies": {
+    "aes-js": "2.0.0",
+    "elliptic": "6.3.1",
+    "inherits": "2.0.1",
+    "pbkdf2": "3.0.4",
+    "rlp": "2.0.0",
+    "setimmediate": "1.0.4",
+    "scrypt-js": "2.0.3",
+    "uuid": "2.0.1",
+    "xmlhttprequest": "1.8.0"
+  },
+  "browser": {
+    "./lib/random-bytes.js": "./lib/browser-random-bytes.js",
+    "xmlhttprequest": "./lib/browser-xmlhttprequest.js"
+  },
+  "devDependencies": {
+    "ethereumjs-abi": "0.6.2",
+    "ethereumjs-tx": "1.1.1",
+    "ethereumjs-util": "4.3.0",
+    "grunt": "^0.4.5",
+    "grunt-browserify": "^5.0.0",
+    "grunt-contrib-uglify": "^1.0.1",
+    "nodeunit": "0.9.1",
+    "web3": "0.15.3",
+
+    "ethereumjs-vm": "1.4.0",
+    "solc": "0.3.5"
+  },
+  "keywords": [
+    "ethereum",
+    "wallet"
+  ],
+  "author": "Richard Moore <me@ricmoo.com>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/ethers-io/ethers-wallet.git"
+  },
+  "license": "MIT"
+}
