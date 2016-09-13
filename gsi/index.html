@@ -12,7 +12,7 @@
   </head>
   <body>
     <div class="container" id="app_content">
-		
+
 		<div class="row">
 			<div class="col-md-4"><h1 id="tktitle">GSI-Token</h1></div>
 			<div class="col-md-4" style="background-color:green;color:white"><h3><span class="glyphicon glyphicon-leaf">&nbsp;</span><span class="balance-green"></span> Grünstrom Token</h3></div>
@@ -21,22 +21,22 @@
 		</div>
 			<div class="row" style="border-top:1px solid #303030">
 			<div class="col-md-4"><h4>&nbsp;</h4>
-			
+
 			</div>
 			<div id="inlForm" class="col-md-8">
 				<div id="selfView">
 				<h4>Zählerstand aktualisieren</h4>
 				<form class="form-inline" onsubmit="return false;">
 				  <div class="form-group">
-						<label class="sr-only" for="requestedReading">Zählerstand in Watt-Stunden</label>			
+						<label class="sr-only" for="requestedReading">Zählerstand in Watt-Stunden</label>
 						<div class="input-group">
-						
+
 						  <input type="number" class="form-control" id="requestedReading" placeholder="Aktueller Zählerstand">
-						
+
 						  <div class="input-group-addon">Wh</div>
 						</div>
-					
-			
+
+
 						<label class="sr-only" for="requestedPLZ">Postleitzahl</label>
 						<div class="input-group">
 							<div class="input-group-addon">Postleitzahl</div>
@@ -58,7 +58,7 @@
 						<button type="submit" class="btn btn-primary" id="doRemView">Öffnen</button>
 					</form>
 				</div>
-			</div>		
+			</div>
 		</div>
 		<hr/>
 		<div class="row" id="alerter">
@@ -75,10 +75,10 @@
 				<tr><td>Ether Guthaben</td><td><span id="ethbalance"></span></td><td><a href="" target="_blank" id="loadETH" class="btn btn-sm btn-primary">aufladen</a>
 				<div id="loadINFO" style="display:none">
 					Um diesen SmartMeter aufzuladen ist als <strong>Bestimmungsort</strong> folgende Ethereum Addresse anzugeben:<br/>
-					<strong><span class="gsiactive"></span></strong>				
+					<strong><span class="gsiactive"></span></strong>
 				</div></td></tr>
 			</table>
-		</div>		
+		</div>
 		<hr/>
 		<div class="row" id="prog" style="display:none">
 			<h3>Prognose Grünstromindex</h3>
@@ -86,27 +86,27 @@
 			<img src="http://mix.stromhaltig.de/gsi/preisverlauf/img/69256.png" id="progpng">
 			</div>
 			<div class="col-md-4"><h4>Index-Werte</h4>
-			<p>Stromverbrauch, der bei einem Wert von <strong>über 50</strong> stattfindet, wird mit Grünstrom-Token belohnt.</p> 
+			<p>Stromverbrauch, der bei einem Wert von <strong>über 50</strong> stattfindet, wird mit Grünstrom-Token belohnt.</p>
 			<p>Stromverbrauch, der bei einem Indexwert von <strong>unter 50</strong> stattfindet, wird mit Graustrom-Token vergütet.</p>
 			<p>Sobald <strong>zwei Ablesungen</strong> vorhanden sind, die mindestens eine und höchstens 24 Stunden getrennt voneinander durchgeführt werden, erfolgt die <strong>Gutschrift der Token</strong>.</p>
-			<p>Sowohl Grünstrom als auch Graustrom-Tokenssind Ethereum <strong>Standard-Tokens</strong> (EIP-20) und können gehandelt, getauscht oder in andere Tokens gewechselt werden.</p>
+			<p>Sowohl Grünstrom als auch Graustrom-Tokens sind Ethereum <strong>Standard-Tokens</strong> (EIP-20) und können gehandelt, getauscht oder in andere Tokens gewechselt werden.</p>
 			</div>
 		</div>
 		<hr/>
 		<div class="row">
 			<h3>Handel/Transfer</h3>
 			    <h4>Transfer Grünstrom-Token</h4>
-				<form class="form-inline" onsubmit="return false;">				
+				<form class="form-inline" onsubmit="return false;">
 				  <div class="form-group">
-						<label class="sr-only" for="sendTokens">Grüntoken Versenden</label>			
+						<label class="sr-only" for="sendTokens">Grüntoken Versenden</label>
 						<div class="input-group">
-						
+
 						  <input type="number" class="form-control" id="sendTokens" placeholder="Anzahl der Grünstrom-Tokens">
-						
+
 						  <div class="input-group-addon">P+</div>
 						</div>
-					
-			
+
+
 						<label class="sr-only" for="sendTo">Empfänger (Account)</label>
 						<div class="input-group">
 							<div class="input-group-addon">Account</div>
@@ -118,13 +118,13 @@
 				</form>
 				<h4>Handel</h4>
 				<p>
-				Die Token sind aktuell bei EtherDelta gelistet, können allerdings auch alternativ bei jedem Exchange gehandelt werden, welcher den ERC-20 Standard unterstützt.
+				Die Token sind aktuell bei EtherDelta gelistet, können allerdings auch alternativ bei jeder Exchange gehandelt werden, welche den ERC-20 Standard unterstützt.
 				<ul>
 					<li><a href="https://etherdelta.github.io/#0x55E7C4a77821d5C50B4570b08F9f92896a25E012-ETH" target="_blank">Grünstrom-Token (P+) gegen Ether (ETH)</a></li>
 					<li><a href="https://etherdelta.github.io/#0x55E7C4a77821d5C50B4570b08F9f92896a25E012-0x28d5113fb69CCad891cB1F88530b7bcf44225da6" target="_blank">Grünstrom-Token (P+) gegen Graustrom-Token (P-)</a></li>
 				</ul>
 				</p>
-				
+
 		</div>
 		<hr/>
 		<div class="row" id="txchartrow" style="display:none">
@@ -138,7 +138,7 @@
 			<p>Im Rahmen dieser Blockchain-Anwendung wird der GrünStromIndex für die Herausgabe von zwei Tokens verwendet.</p>
 			<h3>Grünstrom/Graustrom-Token</h3>
 			<p>
-			Bei den beiden Tokens handelt es sich um jeweils einen Ethereum-Smart-Contract, der der <a href="https://github.com/ethereum/EIPs/issues/20" target="_blank">EIP-20 Spezifikation</a> für Tokens folgt. Damit sind diese beiden Tokens kompatibel zu allen Verwendungsmöglichkeiten eines Ethereum-Tokens.  
+			Bei den beiden Tokens handelt es sich um jeweils einen Ethereum-Smart-Contract, der der <a href="https://github.com/ethereum/EIPs/issues/20" target="_blank">EIP-20 Spezifikation</a> für Tokens folgt. Damit sind diese beiden Tokens kompatibel zu allen Verwendungsmöglichkeiten eines Ethereum-Tokens die den ERC-20 Standard unterstützen.
 			</p>
 			<ul>
 				<li>Besitz</li>
@@ -148,7 +148,7 @@
 			</ul>
 			<h3>Herausgabe von neuen Token</h3>
 			<p>
-			Um neue Tokens zu erhalten, ist der Zählerstand in Watt-Stunden zweimal im Abstand von mindestens einer und höchstens 24 Stunden einzugeben. Sobald die Transaktion in der Blockchain sichtbar ist wird ein sogenanntes Orakel prüfen, welche Werte der GrünStromIndex zwischen den beiden Ablesungen hatte und entsprechend dem Verbrauch Tokens ausgeben. 
+			Um neue Tokens zu erhalten, ist der Zählerstand in Watt-Stunden zweimal im Abstand von mindestens einer und höchstens 24 Stunden einzugeben. Sobald die Transaktion in der Blockchain sichtbar ist wird ein sogenanntes Orakel prüfen, welche Werte der GrünStromIndex zwischen den beiden Ablesungen hatte und entsprechend dem Verbrauch Tokens ausgeben.
 			</p>
 			<p>
 			Liegt das Zeitfenster zwischen den Ablesungen im Bereich von viel Grünstrom, so erhält man Grünstrom-Token.
@@ -158,23 +158,23 @@
 			</p>
 			<h3>Wert der Token</h3>
 			<p>
-			Selbstverständlich handelt ist der Wert hinter den beiden Tokens zunächst symbolisch für das Ereignis, welches bei der Erstellung manifestiert wird. 
+			Selbstverständlich ist der Wert hinter den beiden Tokens zunächst symbolisch für das Ereignis, welches bei der Erstellung manifestiert wird.
 			</p>
 			<p>
 			Für Grünstrom-Token ist es die nachgewiesene Nutzung von Elektrizität aus dem öffentlichen Stromnetz zu Zeiten, bei denen...
 			<ul>
-				<li>... Einspeiung und Entnahme aus dem Netz vor allem <strong>lokal und regional</strong> ausbalanciert ist</li>
+				<li>... Einspeisung und Entnahme aus dem Netz vor allem <strong>lokal und regional</strong> ausbalanciert ist</li>
 				<li>... ein <strong>netzdienliches</strong> Nutzungsverhalten vorliegt</li>
-				<li>... <strong>Brennstoff arme</strong> Stromerzeugung besteht.</li>
+				<li>... <strong>brennstoffarme</strong> Stromerzeugung besteht.</li>
 			</ul>
 			</p>
-			
+
 			<h2>Stromtoken als Crypto-Währungen</h2>
 			<h3>Blockchain</h3>
 			<p>Bei einer Blockchain handelt es sich um eine verteilte Datenbank welche zwischen allen Nutzern geteilt wird. In dieser Datenbank wird eine Art Kontenbuch geführt, welches sämtliche Transaktionen beinhaltet.</p>
-			<p>Im Gegensatz zu Bitcoin ist es bei <a href="https://www.ethereum.org/" target="_blank">Ethereum</a> möglich, mit sogenannten Smart-Contracts zu arbeiten, welche jeweils einer Logik folgen. So existiert die Logik für die beiden Tokens, allerdings auch die Logik für das Auslesen des Grünstrom-Indexes in der Blockchain von Ethereum.</p>
+			<p>Im Gegensatz zur Blockchain von Bitcoin ist es bei <a href="https://www.ethereum.org/" target="_blank">Ethereum</a> möglich, mit sogenannten Smart-Contracts zu arbeiten, welche jeweils einer Logik folgen. So existiert die Logik für die beiden Tokens, allerdings auch die Logik für das Auslesen des Grünstrom-Indexes in der Blockchain von Ethereum.</p>
 			<h3>Transaktionen</h3>
-			<p>Die Logik ist Programmcode, welcher wie eine Beschreibung an Transaktionen hängt. Die Beschreibung macht die Regeln des Smart-Contract aus. 
+			<p>Die Logik ist Programmcode, welcher wie eine Beschreibung an Transaktionen hängt. Die Beschreibung macht die Regeln des Smart-Contract aus.
 			</p>
 			<p>
 			Vom Anwender ausgeführte Transaktionen:
@@ -183,14 +183,14 @@
 			<li>Setzen des Zählerstandes</li>
 			</ul>
 			Im Hintergrund ausgeführte Transaktionen:
-			<ul>			
+			<ul>
 			<li>Gutschrift der Tokens bei der Herausgabe</li>
-			<li>Ersetzen des vorletzten durch den letzten Zählerstands zur Ermittlung der Verbrauchsmenge</li>
+			<li>Ersetzen des vorletzten durch den letzten Zählerstand zur Ermittlung der Verbrauchsmenge</li>
 			<li>Vergütung des Orakel</li>
 			</ul>
-			Vom Orakel ausgeführte Tranksationen:
+			Vom Orakel ausgeführte Transaktionen:
 			<ul>
-			<li>Ermitteln des GrünStromIndex für Postleitzahl</li>
+			<li>Ermitteln des GrünStromIndex für die jeweilige Postleitzahl</li>
 			</ul>
 			</p>
 			<h3>Transparenz</h3>
@@ -203,7 +203,7 @@
 				<li><a href="http://etherscan.io/token/0x28d5113fb69CCad891cB1F88530b7bcf44225da6" target="_blank">Graustrom Token</a></li>
 			</ul>
 			<p>
-			Der Source-Code ist <a href="https://github.com/zoernert/gsi">auf GIT-Hub</a> einsehbar. Als Bestätigung, dass die verwendeten Verträge tatsächlich der Logik folgen wurden diese bei EtherScan validiert. 
+			Der Source-Code ist <a href="https://github.com/zoernert/gsi">auf GIT-Hub</a> einsehbar. Als Bestätigung, dass die verwendeten Verträge tatsächlich der Logik folgen wurden diese bei EtherScan validiert.
 			</p>
 			</p>
 			<h2>Orakel:Automatische Zählerablesung (AMR)</h2>
@@ -212,8 +212,8 @@
 			</p>
 			<h3>Messstellenbetreiber</h3>
 			<p>
-			Ein entscheidender Nachteil der manuellen Ablesung ist die Anzahl der Transaktionen, welche in die Blockchain geschrieben werden müssen. Als Messstellenbetreiber besteht die Möglichkeit ein sogenanntes "Orakel" zu werden, welche bestätige Ablesungen in Masse vornehmen kann.  
-			</p>			
+			Ein entscheidender Nachteil der manuellen Ablesung ist die Anzahl der Transaktionen, welche in die Blockchain geschrieben werden müssen. Als Messstellenbetreiber besteht die Möglichkeit ein sogenanntes "Orakel" zu werden, welche bestätige Ablesungen in Masse vornehmen kann.
+			</p>
 			<h4>Prozess zur Anmeldung als Orakel</h4>
 			<ol>
 			<li>Eintragung im <a href="http://etherscan.io/address/0xCE3b5fFca16ffF926c890f0885A3e90cEb89db0A" target="_blank">GSI-Hauptvertrag</a> (GSI) durch den Besitzer des privaten Schlüssel ( <code>GSI.owner()</code> )</li>
@@ -223,7 +223,7 @@
 			</ol>
 			<h3>Heimautomatisierung</h3>
 			<p>
-			Bei der Integration des Grünstrom-Token in gängige Heimautomatisierungs-Lösungen kommt es darauf an, welche Programmierschnittstellen von dieser Lösung angeboten werden. 
+			Bei der Integration des Grünstrom-Token in gängige Heimautomatisierungs-Lösungen kommt es darauf an, welche Programmierschnittstellen von dieser Lösung angeboten werden.
 			</p>
 			<h4>Verwendung von NodeJS</h4>
 			Ist NodeJS vorhanden, so ist lediglich eine signierte Transaktion an die Funktion <code>GSI.oracalizeReading()</code> des GSI-Hauptvertrages zu senden. Es ist zu beachten, dass der Gaspreis für das manuelle Orakel mit zu senden ist.
@@ -233,7 +233,7 @@
 			</p>
 			<h2>DAPP: Dezentrale Anwendung für die Energiewirtschaft</h2>
 			<p>
-			Der Grünstrom-Index und die darauf basierenden Tokens sind als sogenannte DAPP realisiert. Dies bedeutet, dass beide Funktionsblöcke unabhängig von einer zentralen IT-Infrastruktur <em>in der Blockchain</em> laufen. Zwar existieren auch zentral gehostete Elemente jedoch, haben diese jeweils ein dezentrales Gegenstück.     
+			Der Grünstrom-Index und die darauf basierenden Tokens sind als sogenannte DAPP realisiert. Dies bedeutet, dass beide Funktionsblöcke unabhängig von einer zentralen IT-Infrastruktur <em>in der Blockchain</em> laufen. Zwar existieren auch zentral gehostete Elemente, jedoch haben diese jeweils ein dezentrales Gegenstück.
 			</p>
 			<p>
 			Ein dezentraler Ansatz wurde für maximale Unabhängigkeit des gesamten Systems gewählt. Sowohl Unabhängigkeit von ITK-Umgebungen als auch von einzelnen Anbietern (Hostern, Dienstleister). Das System besteht funktional weiter, selbst wenn eine Komponente des Systems nicht mehr verfügbar ist. Stellt ein Energieversorger, oder ein Messtellenbetreiber seine Geschäftstätigkeit ein, so können von den Letztverbrauchern weiterhin alle Operationen (Handelstätigkeiten) mit den bereits im Besitz befindlichen Tokens durchführen, die auch vorher durchführbar gewesen sind.
@@ -244,27 +244,27 @@
 			</p>
 			<h3>Orakel</h3>
 			<p>
-			Die Ausgabe von Tokens und die damit verbundene Verknüpfung von GrünstromIndex und Zählerstand wird durch den Smart-Contract kontrolliert. Mehrere Orakel können parallel oder getrennt nach Zuständigkeit arbeiten. Sichergestellt wird, dass ein Zählerstandsgang jeweils nur einmal verarbeitet wird. 
+			Die Ausgabe von Tokens und die damit verbundene Verknüpfung von GrünstromIndex und Zählerstand wird durch den Smart-Contract kontrolliert. Mehrere Orakel können parallel oder getrennt nach Zuständigkeit arbeiten. Sichergestellt wird, dass ein Zählerstandsgang jeweils nur einmal verarbeitet wird.
 			</p>
 			<h2>Datenschutz</h2>
 			<p>
 				Der Grünstrom-Index und dessen Tokens werden in der öffentlichen Blockchain verarbeitet. Für die Funktion ist es notwendig, dass der Anwender den privaten Schlüssel für eine Adresse in der Blockchain besitzt. Der private Schlüssel wird direkt auf dem Rechner des Anwender erstellt und sollte diesen niemals verlassen.
 			</p>
 			<p>
-				Jegliche Transaktion, die in die Blockchain geschrieben wird, muss mit einem privaten Schlüssel <em>signiert</em> werden. Damit kann nachgewiesen werden, dass die Absendeadresse (0x12345...) eindeutig ist. 
+				Jegliche Transaktionen, die in die Blockchain geschrieben werden, müssen mit einem privaten Schlüssel <em>signiert</em> werden. Diese verknüpfen die Transaktionen mir der Absenderadresse (0x12345...).
 			</p>
 			<p>
 				Ausgehend vom Anwender werden in der Blockchain folgende Daten verknüpft:
 				<ul>
-				<li>Blockchain-Addresse zu Postleitzahl</li>
-				<li>Blockchain-Addresse zu Zählerstand</li>
+				<li>Blockchain-Adresse zu Postleitzahl</li>
+				<li>Blockchain-Adresse zu Zählerstand</li>
 				<li>Anzahl der Grünstrom-Token</li>
 				<li>Anzahl der Graustrom-Token</li>
 				</ul>
 				Welche tatsächliche Person oder welcher Stromzähler sich tatsächlich hinter der Blockchain-Adresse verbirgt ist nicht einsehbar. Zu keinem Zeitpunkt werden Name oder andere Personalien erhoben.
 			</p>
 			<p>
-				Eingeschränkt  wird dieses hohe Niveau des Datenschutzes, wenn ein AMR (Automatische Zählerablesung) zum Einsatz kommt. In diesem Fall sind dem Anbieter der Ablesung eine Zuordnung zwischen Zähler und Blockchain-Adresse bekannt. Entsprechende Dienstleister müssen daher einen geeigneten Schutz vor unberechtigtem Zugriff auf diese Daten implementieren. 
+				Eingeschränkt wird dieses hohe Niveau des Datenschutzes, wenn ein AMR (Automatische Zählerablesung) zum Einsatz kommt. In diesem Fall sind dem Anbieter der Ablesung eine Zuordnung zwischen Zähler und Blockchain-Adresse bekannt. Entsprechende Dienstleister müssen daher einen geeigneten Schutz vor unberechtigtem Zugriff auf diese Daten implementieren.
 			</p>
 		</div>
 	</div>
