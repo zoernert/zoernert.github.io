@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
-
 	<script type="text/javascript" src="https://zoernert.github.io/ewallet/dist/ethers-wallet.min.js"></script>
-	<script type="text/javascript" src="https://zoernert.github.io/js/api.js"></script>
+	
   </head>
   <body>
     <div class="container" id="app_content">
@@ -17,7 +16,22 @@
 			<span style="float:right;color:#909090"><em>mit nachgewiesener Nutzung von lokalem Wind-,Wasser-,Sonnenstrom die Energiewende meistern.</em></span>
 		</div>
 
-	
+		<div class="row">
+			<h2>Anwendungsfall: Anmelden und Abmelden</h2>
+			<p>
+			Da es sich bei GrünStromJetons um eine reine Javascript Anwendung handelt, entfällt die übliche Registrierung bei einer Session auf dem Server. Die gesamte Intelligenz der Benutzerverwaltung ist daher an den Browser delegiert. 
+			</p>
+			<p>
+			Der Benutzer ist angemeldet, sobald er im Besitz einen privaten Schlüssels ist. Daraus ergeben sich die folgenden Operationen:
+			<ul>
+				<li>Neuen Schlüssel anlegen (Registrieren)</li>
+				<li>Vorhandenen Schlüssel verwenden (Anmelden)</li>
+				<li>Vorhandenen Schlüssel löschen (Abmelden)</li>
+			</ul>
+			Wird ein privater Schlüssel durch den Anwender gelöscht (und nicht vorher gespeichert!), so besteht keine Möglichkeit diesen wieder herzustellen.
+			</p>
+		
+		</div>
 
 	</div>
 	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
@@ -27,7 +41,11 @@
     </footer>
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
-
+	
+	<!-- Eigentliche API Integration für GSJ -->
+	<script type="text/javascript" src="https://zoernert.github.io/js/api.js"></script>
+	
+	<!-- Laden des Beispielcodes -->
 	<script src="./index.js"></script>
   </body>
 </html>
