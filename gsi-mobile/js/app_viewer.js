@@ -13,7 +13,7 @@ gsi.gas=20000;
 
 function $_GET(param) {
 	var vars = {};
-	window.location.href.replace( location.hash, '' ).replace( 
+	window.location.href.replace( location.hash, '' ).replace(
 		/[?&]+([^=&]+)=?([^&]*)?/gi, // regexp
 		function( m, key, value ) { // callback
 			vars[key] = value !== undefined ? value : '';
@@ -21,7 +21,7 @@ function $_GET(param) {
 	);
 
 	if ( param ) {
-		return vars[param] ? vars[param] : null;	
+		return vars[param] ? vars[param] : null;
 	}
 	return vars;
 }
@@ -30,56 +30,56 @@ function addLogMsg(tom,msg) {
 	var logmsg = {}
 	logmsg.msg = msg;
 	logmsg.time = new Date().getTime();
-	logmsg.tom = tom;	
+	logmsg.tom = tom;
 	gsi.logs.push(logmsg);
 	$('#logTab').empty();
 	for(var i=0;i<gsi.logs.length;i++) {
 		var html="";
 		html="<tr><td>";
 		if(gsi.logs[i].tom=="info") {
-			html+="<span class='label label-info'>Info</span>";		
+			html+="<span class='label label-info'>Info</span>";
 		}
 		if(gsi.logs[i].tom=="error") {
-			html+="<span class='label label-danger'>Fehler</span>";		
+			html+="<span class='label label-danger'>Fehler</span>";
 		}
 		html+="</td><td>";
 		html+=new Date(gsi.logs[i].time).toLocaleString();
 		html+="</td><td>";
 		html+=gsi.logs[i].msg;
 		html+="</td></tr>";
-		$(html).prependTo('#logTab');	
+		$(html).prependTo('#logTab');
 	}
 	$('#alerter').show();
-} 
-function openingWallet() {		
+}
+function openingWallet() {
 	$.getJSON("./js/current.deployment.json",function(data) {
-		gsi.deployment=data;	
-		$('#loadETH').attr('href','https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39&address='+gsi.address);	
+		gsi.deployment=data;
+		$('#loadETH').attr('href','https://anycoindirect.eu/de/kaufen/ethers?discref=6c25dccb-1272-4668-8219-708427b66c39&address='+gsi.address);
 		$('#recAddr').html(gsi.address);
 		$.getJSON("./build/GSI.abi",function(abi_code) {
 			gsi.obj.GSI = gsi.wallet.getContract(gsi.deployment.gsi,abi_code);
 			$.getJSON("./build/GSIToken.abi",function(token_abi) {
-				gsi.obj.GSI.greenToken().then(function(r) {		
+				gsi.obj.GSI.greenToken().then(function(r) {
 						gsi.obj.greenToken=gsi.wallet.getContract(r[0],token_abi);
 						gsi.obj.greenToken.balanceOf(gsi.address).then(function(v) {
 							$('.balance-green').html((v.toString()*1).format());
-							$('#sendTokens').attr('placeholder','Max: '+(v.toString()*1));							
+							$('#sendTokens').attr('placeholder','Max: '+(v.toString()*1));
 						});
-				});	
-				gsi.obj.GSI.greyToken().then(function(r) {		
+				});
+				gsi.obj.GSI.greyToken().then(function(r) {
 						gsi.obj.greyToken=gsi.wallet.getContract(r[0],token_abi);
 						gsi.obj.greyToken.balanceOf(gsi.address).then(function(v) {
 							$('.balance-gray').html((v.toString()*1).format());
 						});
-				});	
+				});
 				gsi.wallet.getBalance().then(function(r) {
 						$('#ethbalance').html((r.toString().substr(0,r.toString().length-6)/10000).format());
 						if((r.toString().substr(0,r.toString().length-6)/10000)<10000+gsi.gas) {
 							if(!gsi.hasBalanceError) {
-							addLogMsg('error','<strong>Guthaben für Transaktionen zu nieder.</strong><br/> Aufladung notwendig, um Zählerstand zu aktualisieren, Postleitzahl zu setzen oder Jetons zu transferieren. Bitte wenden Sie sich an Ihren Messstellenbetreiber für weitere Informationen zur Aufladung und Freischaltung von Transaktionen.');							
+							addLogMsg('error','<strong>Guthaben für Transaktionen zu nieder.</strong><br/> Aufladung notwendig, um Zählerstand zu aktualisieren, Postleitzahl zu setzen oder Jetons zu transferieren. Bitte wenden Sie sich an Ihren Messstellenbetreiber für weitere Informationen zur Aufladung und Freischaltung von Transaktionen.');
 							gsi.hasBalanceError=true;
 							}
-						} 
+						}
 				});
 				$('.gsiactive').html(gsi.address.substr(0,30)+"...");
 				$('.gsiactive').attr('title',gsi.address);
@@ -113,21 +113,21 @@ function openingWallet() {
 		if($('#requestedPLZ').val()!=gsi.plz) {
 			if($('#requestedPLZ').val().length==5) {
 				gsi.obj.GSI.setPlz($('#requestedPLZ').val()).then(function(e) {console.log(e);
-				addLogMsg('info','<strong>Transaktion '+e+' gesendet.</strong><br/> Der Status der Verarbeitung kann bei <a href="http://etherscan.io/tx/'+e+'" target="_blank">Etherscan.io</a> kontrolliert werden.');				
+				addLogMsg('info','<strong>Transaktion '+e+' gesendet.</strong><br/> Der Status der Verarbeitung kann bei <a href="http://etherscan.io/tx/'+e+'" target="_blank">Etherscan.io</a> kontrolliert werden.');
 				});
 			} else {
-				addLogMsg('error','<strong>Postleitzahl ungühltig</strong><br/>Es können nur Postleitzahlen in Deutschland verwendet werden.');				
+				addLogMsg('error','<strong>Postleitzahl ungültig</strong><br/>Es können nur Postleitzahlen in Deutschland verwendet werden.');
 			}
 		}
 		var options = {
 			value:gsi.gas
 		};
-		gsi.obj.GSI.oracalizeReading($('#requestedReading').val()*1,options).then(function(e)  {			
+		gsi.obj.GSI.oracalizeReading($('#requestedReading').val()*1,options).then(function(e)  {
 			addLogMsg('info','<strong>Transaktion '+e+' gesendet.</strong><br/> Der Status der Verarbeitung kann bei <a href="http://etherscan.io/tx/'+e+'" target="_blank">Etherscan.io</a> kontrolliert werden.');
-			$('#doRequested').attr('disabled','false');	
+			$('#doRequested').attr('disabled','false');
 		});
 	});
-		
+
 	if(!gsi.c) {
 	gsi.c=setInterval(function() {
 									openingWallet();
@@ -142,40 +142,40 @@ function unlockedWallet() {
 	$('#openWallet').show();
 }
 function doNew() {
-					var pk = window.localStorage.getItem("pk");					
+					var pk = window.localStorage.getItem("pk");
 					var array = new  Uint16Array(32);
 					var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));
-					
-					gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
-					window.localStorage.setItem("address",gsi.wallet.address); 					
-					window.localStorage.setItem("pk",gsi.wallet.privateKey);					
 
-					gsi.address=gsi.wallet.address;					
+					gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
+					window.localStorage.setItem("address",gsi.wallet.address);
+					window.localStorage.setItem("pk",gsi.wallet.privateKey);
+
+					gsi.address=gsi.wallet.address;
 }
-$(document).ready( 
+$(document).ready(
 	function() {
 		var seed=window.localStorage.getItem("address");
 		if($_GET("a")) {
-			$('#seedIn').val($_GET("a"));			
+			$('#seedIn').val($_GET("a"));
 		}
 		$('#closedWallet').show();
-		
+
 		$('#doOpen').click(function() {
 			gsi.address=$('#seedIn').val();
-			if(!window.localStorage.getItem("pk")) {				
+			if(!window.localStorage.getItem("pk")) {
 				doNew();
-			}	else {			
+			}	else {
 				gsi.wallet=new Wallet(window.localStorage.getItem("pk"), new Wallet.providers.EtherscanProvider({testnet: false}));
 			}
 			gsi.address=$('#seedIn').val();
 			console.log(gsi.address);
 			unlockedWallet();
-		});		
+		});
 		$('#doSwitch').click(function() {
-			gsi.address=$('#seedSwitch').val();						
+			gsi.address=$('#seedSwitch').val();
 			console.log(gsi.address);
 			unlockedWallet();
-		});		
-	}	
+		});
+	}
 );
-	 
+
