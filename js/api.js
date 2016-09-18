@@ -39,9 +39,10 @@ gsi.app.logout = function() {
 
 gsi.app.newKey = function() {
 		var array = new  Uint16Array(32);
-		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));		
-		window.localStorage.setItem("gsi.pk",pk);
+		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));										
+		var wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));					
+		window.localStorage.setItem("gsi.pk",wallet.privateKey);
 		gsi.status.login=false;
-		return pk;		
+		return wallet.privateKey;		
 }
 
