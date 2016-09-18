@@ -24,15 +24,32 @@
 			<p>
 			Der Benutzer ist angemeldet, sobald er im Besitz einen privaten Schlüssels ist. Daraus ergeben sich die folgenden Operationen:
 			<ul>
-				<li>Neuen Schlüssel anlegen (Registrieren)</li>
-				<li>Vorhandenen Schlüssel verwenden (Anmelden)</li>
-				<li>Vorhandenen Schlüssel löschen (Abmelden)</li>
+				<li>Neuen Schlüssel anlegen (Registrieren = <code>gsi.app.newKey()</code> )</li>
+				<li>Vorhandenen Schlüssel verwenden (Anmelden = <code>gsi.app.login()</code> )</li>
+				<li>Vorhandenen Schlüssel löschen (Abmelden = <code>gsi.app.logout()</code> )</li>
 			</ul>
 			Wird ein privater Schlüssel durch den Anwender gelöscht (und nicht vorher gespeichert!), so besteht keine Möglichkeit diesen wieder herzustellen.
 			</p>
 		
 		</div>
-
+		<div class="row">
+			<h2>Demo</h2>
+			<form class="form" onsubmit="return false;">
+			<div class="form-group">
+				<label for="privateKey">Privater Schlüssel:</label>
+				<input type="text" class="form-control" name="privateKey" id="privateKey" placeholder="0x..">
+			</div>
+			<div class="form-group">
+				<label for="address">Öffentliche Adresse:</label>
+				<input type="text" class="form-control" name="address" id="address" disabled="true"/>
+			</div>	
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" id="btnLogin" value="Anmelden"/>
+				<input type="button" class="btn btn-primary" id="btnRegister" value="Registrieren"/>
+				<input type="button" class="btn btn-primary" id="btnLogout" value="Abmelden"/>
+			</div>
+			</form>
+		</div>
 	</div>
 	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
       <div class="container">
