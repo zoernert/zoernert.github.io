@@ -14,6 +14,9 @@ gsi.app = {};
 gsi.status = {};
 
 gsi.app.login = function(private_key) {
+		if(!private_key) {
+			private_key=window.localStorage.getItem("gsi.pk");
+		}
 		if(private_key.length!=66) {
 			gsi.status.login=false;
 			throw "Invalid Key Length";
@@ -36,8 +39,7 @@ gsi.app.logout = function() {
 
 gsi.app.newKey = function() {
 		var array = new  Uint16Array(32);
-		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));
-		pk=pk.toString();
+		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));		
 		window.localStorage.setItem("gsi.pk",pk);
 		gsi.status.login=false;
 		return pk;		
