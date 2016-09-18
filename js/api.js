@@ -13,6 +13,11 @@ gsi.gas=20000;
 gsi.app = {};
 gsi.status = {};
 
+/**
+	Performs a pseudo login using a given private key (length=66 bytes) 
+	If no private key is present - it tries to open existing key from localStorage	
+	Changes gsi.status.login to true if login was successful
+*/
 gsi.app.login = function(private_key) {
 		if(!private_key) {
 			private_key=window.localStorage.getItem("gsi.pk");
@@ -29,6 +34,10 @@ gsi.app.login = function(private_key) {
 		gsi.status.login=true;		
 }
 
+/**
+	Performs a pseudo logout by renmoving private key from localStorage
+	There is no option to get it back!
+*/
 gsi.app.logout = function() {
 		gsi.status.login=false;
 		window.localStorage.setItem("gsi.pk","");
@@ -37,6 +46,11 @@ gsi.app.logout = function() {
 		gsi.wallet=null;
 }
 
+/**
+	Performs a pseudo registration by creating a new key and saves it to localStorage
+	Returns new key created.
+	Does not login user.
+*/
 gsi.app.newKey = function() {
 		var array = new  Uint16Array(32);
 		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));										
