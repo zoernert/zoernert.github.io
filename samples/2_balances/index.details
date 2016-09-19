@@ -1,0 +1,9 @@
+﻿---
+name: GrünStromJeton - Anwendungsfall: Anmelden und Anmelden 
+description: Grundlagen der Verwendung von GrünStromJeton mit JavaScript API
+authors:
+  - Thorsten Zoerner
+resources:
+  - ./sample.html
+  - ./index.js
+...

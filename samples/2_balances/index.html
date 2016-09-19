@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gr&uuml;nStromJeton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="https://zoernert.github.io/ewallet/dist/ethers-wallet.min.js"></script>
+	
+  </head>
+  <body>
+    <div class="container" id="app_content">
+
+		<div class="row" style="margin-bottom:10px;border-bottom:1px solid #303030">
+			<h1 id="tktitle"><span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span></h1>
+			<span style="float:right;color:#909090"><em>mit nachgewiesener Nutzung von lokalem Wind-,Wasser-,Sonnenstrom die Energiewende meistern.</em></span>
+		</div>
+
+		<div class="row">
+			<h2>Anwendungsfall: Abrufen von Bilanzen</h2>
+			<p>
+			Da es sich bei GrünStromJetons um eine Blockchain-Anwendung handelt, ist der Abruf einer Bilanz (Summe der Jetons) auch dann möglich, wenn keine Anmeldung des Anwenders vorhanden ist. Es wird lediglich die Account-Adresse benötigt.
+			</p>			
+			<ul>
+				<li>Abruf der GrünStromJetons für eine Adresse <code>gsi.app.balanceOfGreen(address,callback)</code></li>
+				<li>Abruf der GrauStromJetons für eine Adresse <code>gsi.app.balanceOfGrey(address,callback)</code></li>				
+			</ul>					
+		</div>
+		<div class="row">
+			<h2>Demo</h2>
+			<form class="form" onsubmit="return false;">
+			<div class="form-group">
+				<label for="address">Account Adresse:</label>
+				<input type="text" class="form-control" name="address" id="address" placeholder="0x..">
+			</div>			
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" id="btnBalance" value="Abrufen"/>				
+			</div>
+			</form>
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<h3>GrünStromJetons</h3>
+				<h2 class="greenBalance">0</h2>
+			</div>
+			<div class="col-md-4">
+				<h3>GrauStromJetons</h3>
+				<h2 class="greyBalance">0</h2>
+			</div>
+			<div class="col-md-4">
+				<h3>Anteil Grünstrom am Verbrauch</h3>
+				<h2 class="greenPercent">0%</h2>
+			</div>
+		</div>
+		<div class="row">
+			<h2>Code</h2>	
+			<p>
+				<a class="btn btn-default" href="https://github.com/zoernert/zoernert.github.io/tree/master/samples/2_balances">GitHub</a>
+			</p>
+			<p>
+				<table class="table">
+				<tr><th>Datei</th><th>Beschreibung</th></tr>
+				<tr><td>./index.html</td><td>Diese HTML Seite</td></tr>
+				<tr><td>./index.js</td><td>View-Logik</td></tr>
+				</table>
+			</p>			
+		</div>
+		
+		<div class="row">
+			<h2>Best Practice</h2>
+			<p>
+				<ul>
+					<li>Es existiert die Funktion <code>gsi.app.forceLogin(callback)</code>, welche beim Document-Ready Event geladen werden kann, um eine schnellere Initialisierung zu ermöglichen</li>
+					<li>Auf Veränderungen sollte nicht häufiger als einmal pro Minute geachtet werden.</li>					
+				</ul>
+			</p>
+		</div>
+	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	
+	<!-- Eigentliche API Integration für GSJ  -->
+	<script type="text/javascript" src="https://zoernert.github.io/js/api.js"></script>
+	
+	<!-- Laden des Beispielcodes -->
+	<script src="./index.js"></script>
+  </body>
+</html>
