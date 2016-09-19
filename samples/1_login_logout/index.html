@@ -50,6 +50,31 @@
 			</div>
 			</form>
 		</div>
+		<div class="row">
+			<h2>Code</h2>	
+			<p>
+				<a class="btn btn-default" href="https://github.com/zoernert/zoernert.github.io/tree/master/samples/1_login_logout">GitHub</a>
+			</p>
+			<p>
+				<table class="table">
+				<tr><th>Datei</th><th>Beschreibung</th></tr>
+				<tr><td>./index.html</td><td>Diese HTML Seite</td></tr>
+				<tr><td>./index.js</td><td>View-Logik</td></tr>
+				</table>
+			</p>			
+		</div>
+		
+		<div class="row">
+			<h2>Best Practice</h2>
+			<p>
+				<ul>
+					<li>Beim Document Ready bereits <code>gsi.app.login()</code> ohne Parameter aufrufen, damit bei vorhandenem Schlüssel dieser verwendet wird.</li>
+					<li>Ist der Anwender angemeldet, so muss in der UI die Möglichkeit bestehen den privaten Schlüssel abzurufen, damit dieser auch in einer anderen Anwendung verwendet werden kann</li>
+					<li>Die Implementierung sollte nicht als Wallet im Sinne von Ethereum-Coin Speicher genutzt werden.</li>
+					<li>Privater Schlüssel darf nicht an den Server gesendet werden</li>
+				</ul>
+			</p>
+		</div>
 	</div>
 	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
       <div class="container">

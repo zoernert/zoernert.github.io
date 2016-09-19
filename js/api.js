@@ -1,4 +1,14 @@
-﻿var call_delay=10000;
+﻿/**
+	JavaScript API to work with GrünStromJetons
+	Author: Thorsten Zoerner <me@thorsten-zoerner.com>
+	Version: 0.1
+	License: MIT
+	Dependency: EthersWallet
+	
+	Demo and Documentation: https://zoernert.github.io/samples/
+*/
+
+var call_delay=10000;
 
 Number.prototype.format = function(n, x) {
     var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
@@ -35,7 +45,7 @@ gsi.app.login = function(private_key) {
 }
 
 /**
-	Performs a pseudo logout by renmoving private key from localStorage
+	Performs a pseudo logout by removing private key from localStorage
 	There is no option to get it back!
 */
 gsi.app.logout = function() {

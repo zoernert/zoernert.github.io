@@ -4,6 +4,6 @@ description: Grundlagen der Verwendung von GrünStromJeton mit JavaScript API
 authors:
   - Thorsten Zoerner
 resources:
-  - ./index.html
+  - ./sample.html
   - ./index.js
 ...
