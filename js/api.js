@@ -69,4 +69,3 @@ gsi.app.newKey = function() {
 		gsi.status.login=false;
 		return wallet.privateKey;		
 }
-
