@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <title>Gr&uuml;nStromJeton</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" media="screen">
+	<script type="text/javascript" src="https://zoernert.github.io/ewallet/dist/ethers-wallet.min.js"></script>
+	
+  </head>
+  <body>
+    <div class="container" id="app_content">
+
+		<div class="row" style="margin-bottom:10px;border-bottom:1px solid #303030">
+			<h1 id="tktitle"><span style="color:#32CD32">Gr&uuml;n</span><span style="color:#228B22">Strom</span><span style="color:#006400">Jeton</span></h1>
+			<span style="float:right;color:#909090"><em>mit nachgewiesener Nutzung von lokalem Wind-,Wasser-,Sonnenstrom die Energiewende meistern.</em></span>
+		</div>
+
+		<div class="row">
+			<h2>Anwendungsfall: Anmelden und Abmelden</h2>
+			<p>
+			Da es sich bei GrünStromJetons um eine reine Javascript Anwendung handelt, entfällt die übliche Registrierung bei einer Session auf dem Server. Die gesamte Intelligenz der Benutzerverwaltung ist daher an den Browser delegiert. 
+			</p>
+			<p>
+			Der Benutzer ist angemeldet, sobald er im Besitz einen privaten Schlüssels ist. Daraus ergeben sich die folgenden Operationen:
+			<ul>
+				<li>Neuen Schlüssel anlegen (Registrieren = <code>gsi.app.newKey()</code> )</li>
+				<li>Vorhandenen Schlüssel verwenden (Anmelden = <code>gsi.app.login()</code> )</li>
+				<li>Vorhandenen Schlüssel löschen (Abmelden = <code>gsi.app.logout()</code> )</li>
+			</ul>
+			Wird ein privater Schlüssel durch den Anwender gelöscht (und nicht vorher gespeichert!), so besteht keine Möglichkeit diesen wieder herzustellen.
+			</p>
+		
+		</div>
+		<div class="row">
+			<h2>Demo</h2>
+			<form class="form" onsubmit="return false;">
+			<div class="form-group">
+				<label for="privateKey">Privater Schlüssel:</label>
+				<input type="text" class="form-control" name="privateKey" id="privateKey" placeholder="0x..">
+			</div>
+			<div class="form-group">
+				<label for="address">Öffentliche Adresse:</label>
+				<input type="text" class="form-control" name="address" id="address" disabled="true"/>
+			</div>	
+			<div class="form-group">
+				<input type="button" class="btn btn-primary" id="btnLogin" value="Anmelden"/>
+				<input type="button" class="btn btn-primary" id="btnRegister" value="Registrieren"/>
+				<input type="button" class="btn btn-primary" id="btnLogout" value="Abmelden"/>
+			</div>
+			</form>
+		</div>
+		<div class="row">
+			<h2>Code</h2>	
+			<p>
+				<a class="btn btn-default" href="https://github.com/zoernert/zoernert.github.io/tree/master/samples/1_login_logout">GitHub</a>
+			</p>
+			<p>
+				<table class="table">
+				<tr><th>Datei</th><th>Beschreibung</th></tr>
+				<tr><td>./index.html</td><td>Diese HTML Seite</td></tr>
+				<tr><td>./index.js</td><td>View-Logik</td></tr>
+				</table>
+			</p>			
+		</div>
+		
+		<div class="row">
+			<h2>Best Practice</h2>
+			<p>
+				<ul>
+					<li>Beim Document Ready bereits <code>gsi.app.login()</code> ohne Parameter aufrufen, damit bei vorhandenem Schlüssel dieser verwendet wird.</li>
+					<li>Ist der Anwender angemeldet, so muss in der UI die Möglichkeit bestehen den privaten Schlüssel abzurufen, damit dieser auch in einer anderen Anwendung verwendet werden kann</li>
+					<li>Die Implementierung sollte nicht als Wallet im Sinne von Ethereum-Coin Speicher genutzt werden.</li>
+					<li>Privater Schlüssel darf nicht an den Server gesendet werden</li>
+				</ul>
+			</p>
+		</div>
+	</div>
+	 <footer class="footer" style="border-top:1px solid #303030;margin-top:20px;">
+      <div class="container">
+        <p class="text-muted"><a href="https://gitter.im/zoernert/gsi/" target="_blank">Gitter (Hilfe)</a> | <a href=https://zoernert.github.io/gsi/" target="_blank">FrontEnd (github.io)</a> | <a href="https://github.com/zoernert/gsi">Source (GIT)</a> | <a href="https://blog.stromhaltig.de/search/GSI">Blog</a> | <a href="http://stromhaltig.de/impressum/">Impressum/Kontakt</a></p>
+      </div>
+    </footer>
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
+	
+	<!-- Eigentliche API Integration für GSJ -->
+	<script type="text/javascript" src="https://zoernert.github.io/js/api.js"></script>
+	
+	<!-- Laden des Beispielcodes -->
+	<script src="./index.js"></script>
+  </body>
+</html>
