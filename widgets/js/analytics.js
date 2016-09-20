@@ -101,6 +101,7 @@ $(document).ready( function() {
 			data.addColumn('datetime', 'Date');
 			data.addColumn('number', 'Grün');
 			data.addColumn('number', 'Grau');
+			
 			gsi.green=gsi.green.reverse();
 			gsi.grey=gsi.grey.reverse();
 			var j=0;
@@ -111,27 +112,26 @@ $(document).ready( function() {
 						t_grey+=gsi.grey[j].value;						
 						//data.addRow([gsi.grey[j].time,t_green,t_grey]);
 						if(gsi.grey[j]) {
-						$("<tr><td>"+new Date(gsi.grey[j].time).toLocaleString()+"</td><td class='alert alert-default'>+"+gsi.grey[j].value+" GrauStrom</td><td>"+t_green+"</td><td>"+t_grey+"</td></tr>").appendTo("#tbl");
+						$("<tr><td>"+new Date(gsi.grey[j].time).toLocaleString()+"</td><td class='alert alert-default'>+"+gsi.grey[j].value+" GrauStrom</td><td>"+t_green+" ("+Math.round(((1/(t_green+t_grey))*t_green)*100)+"%)</td><td>"+t_grey+"</td></tr>").appendTo("#tbl");
 						}
 						j++;
 						if(i>0) i--;
 						
 				}  else {				
-					if(gsi.green[j]) { 
-						t_green+=gsi.green[j].value 					
-						data.addRow([gsi.green[j].time,t_green,t_grey]);
-						$("<tr><td>"+new Date(gsi.green[i].time).toLocaleString()+"</td><td class='alert alert-success'>+"+gsi.green[i].value+" GrünStrom</td><td>"+t_green+"</td><td>"+t_grey+"</td></tr>").appendTo("#tbl");
+					if(gsi.green[i]) { 
+						t_green+=gsi.green[i].value 					
+						data.addRow([gsi.green[i].time,t_green,t_grey]);
+						$("<tr><td>"+new Date(gsi.green[i].time).toLocaleString()+"</td><td class='alert alert-success'>+"+gsi.green[i].value+" GrünStrom</td><td>"+t_green+" ("+Math.round(((1/(t_green+t_grey))*t_green)*100)+"%)</td><td>"+t_grey+"</td></tr>").appendTo("#tbl");
 					}
 				}
 				
 			}			
 			 var options = {
-				  title: 'Jeton Performance',
+				  title: 'Jeton Performance '+$_GET("a"),
 				  hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
 				  vAxis: {minValue: 0},
 				  colors: ['green','gray']
-				};
-
+				};				
 				var chart = new google.visualization.AreaChart(document.getElementById('widgets_content'));
 				chart.draw(data, options);
 		} else {
