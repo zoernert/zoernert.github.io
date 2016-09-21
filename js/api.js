@@ -23,6 +23,17 @@ gsi.gas=20000;
 gsi.app = {};
 gsi.status = {};
 
+ if (typeof web3 !== 'undefined') {
+    // Use Mist/MetaMask's provider
+    web3 = new Web3(web3.currentProvider);
+	//gsi.provider=web3;
+  } else {
+    console.log('No web3? You should consider trying MetaMask! or Mist...')    
+	// Not Supported!
+}
+if(!gsi.provider) {
+	gsi.provider= new Wallet.providers.EtherscanProvider({testnet: false});
+}
 
 /************************************************************/
 /*  Login/Account Management Related Functions				*/
@@ -42,7 +53,7 @@ gsi.app.login = function(private_key) {
 			return;  
 		}
 		window.localStorage.setItem("gsi.pk",private_key);
-		gsi.wallet=new Wallet(private_key, new Wallet.providers.EtherscanProvider({testnet: false}));
+		gsi.wallet=new Wallet(private_key, gsi.provider);
 		window.localStorage.setItem("gsi.address",gsi.wallet.address);
 		gsi.address=gsi.wallet.address;			
 		$.getJSON("https://zoernert.github.io/js/current.deployment.json",function(data) {
@@ -82,8 +93,8 @@ gsi.app.logout = function() {
 */
 gsi.app.newKey = function() {
 		var array = new  Uint16Array(32);
-		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));										
-		var wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));					
+		var pk = new Wallet.utils.Buffer(window.crypto.getRandomValues(array));			
+		var wallet = new Wallet(pk, gsi.provider);					
 		window.localStorage.setItem("gsi.pk",wallet.privateKey);
 		gsi.status.login=false;
 		return wallet.privateKey;		
@@ -107,7 +118,7 @@ gsi.app.forceLogin=function(cb) {
 }
 
 /************************************************************/
-/*  Balance Related Functions				*/
+/*  Balance Related Functions								*/
 /************************************************************/
 
 /**
@@ -133,3 +144,32 @@ gsi.app.balanceOfGrey=function(address,cb) {
 			});
 		}
 }
+
+
+/************************************************************/
+/*  Meter Reading related Functions							*/
+/************************************************************/
+
+/**
+	Commits MeterReading and returns transaction hash to callback. 
+*/
+gsi.app.commitReading=function(reading,cb) {
+		if(!gsi.obj.GSI) {  gsi.app.forceLogin(function() { gsi.app.commitReading(reading,cb); }); return;} 
+		var options = {
+			value:gsi.gas
+		};
+		gsi.obj.GSI.oracalizeReading(reading*1,options).then(function(e)  {			
+			cb(e);
+		});
+}
+
+/**
+	Sets Postleitzahl (ZIP-Code in Germany) for account and returns transaction hash to callback
+*/
+
+gsi.app.setPLZ=function(plz,cb) {
+		if(plz.length!=5) return;
+		if(!gsi.obj.GSI) {  gsi.app.forceLogin(function() { gsi.app.setPLZ(reading,cb); }); return;} 
+		gsi.obj.GSI.setPlz(plz).then(function(e) {cb(e);});
+}
+

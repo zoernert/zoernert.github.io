@@ -17,46 +17,36 @@
 		</div>
 
 		<div class="row">
-			<h2>Anwendungsfall: Abrufen von Bilanzen</h2>
+			<h2>Anwendungsfall: Metering - Zählerstandsgang / Manuelle Erfassung</h2>
 			<p>
-			Da es sich bei GrünStromJetons um eine Blockchain-Anwendung handelt, ist der Abruf einer Bilanz (Summe der Jetons) auch dann möglich, wenn keine Anmeldung des Anwenders vorhanden ist. Es wird lediglich die Account-Adresse benötigt.
+			Damit ein Stromkunde die Jetons gutgeschrieben bekommt, sind mindestens zwei Ablesungen innerhalb von 24 Stunden notwendig. Diese werden als Transaktion in die Blockchain geschrieben und von dort durch die Oracle des GrünStromIndex verarbeitet. Zur Lokalisierung ist es notwendig eine Postleitzahl zu setzen.
 			</p>			
 			<ul>
-				<li>Abruf der GrünStromJetons für eine Adresse <code>gsi.app.balanceOfGreen(address,callback)</code></li>
-				<li>Abruf der GrauStromJetons für eine Adresse <code>gsi.app.balanceOfGrey(address,callback)</code></li>				
+				<li>Zählerstand übermitteln (in Wh) <code>gsi.app.commitReading(zaehlerstand,callback)</code></li>
+				<li>Setzen der Postleitzahl (Deutschland) <code>gsi.app.setPLZ(plz,callback)</code></li>
 			</ul>					
 		</div>
 		<div class="row">
 			<h2>Demo</h2>
 			<form class="form" onsubmit="return false;">
 			<div class="form-group">
-				<label for="address">Account Adresse:</label>
-				<input type="text" class="form-control" name="address" id="address" placeholder="0x..">
+				<label for="reading">Zählerstand in Wh:</label>
+				<input type="text" class="form-control" name="reading" id="reading" placeholder="1234..">
 			</div>			
 			<div class="form-group">
-				<input type="button" class="btn btn-primary" id="btnBalance" value="Abrufen"/>				
+				<input type="button" class="btn btn-primary" id="btnCommit" value="Übertragen"/>				
 			</div>
 			</form>
-			<em>Zum Testen kann 0x9707f3c9ca3c554a6e6d31b71a3c03d7017063f4 als Account Adresse verwendet werden.</em>
+			
 		</div>
 		<div class="row">
-			<div class="col-md-4">
-				<h3>GrünStromJetons</h3>
-				<h2 class="greenBalance">0</h2>
-			</div>
-			<div class="col-md-4">
-				<h3>GrauStromJetons</h3>
-				<h2 class="greyBalance">0</h2>
-			</div>
-			<div class="col-md-4">
-				<h3>Anteil Grünstrom am Verbrauch</h3>
-				<h2 class="greenPercent">0%</h2>
-			</div>
+			<h3>Letzte Transaktion</h3>
+			<span class="alert" id="txId"></span>
 		</div>
 		<div class="row">
 			<h2>Code</h2>	
 			<p>
-				<a class="btn btn-default" href="https://github.com/zoernert/zoernert.github.io/tree/master/samples/2_balances">GitHub</a>
+				<a class="btn btn-default" href="https://github.com/zoernert/zoernert.github.io/tree/master/samples/3_metering">GitHub</a>
 			</p>
 			<p>
 				<table class="table">
@@ -72,7 +62,7 @@
 			<p>
 				<ul>
 					<li>Es existiert die Funktion <code>gsi.app.forceLogin(callback)</code>, welche beim Document-Ready Event geladen werden kann, um eine schnellere Initialisierung zu ermöglichen</li>
-					<li>Auf Veränderungen sollte nicht häufiger als einmal pro Minute geachtet werden.</li>					
+					<li>Es findet keine Prüfung in der API statt, ob der Zählerstand plausibel ist. D.h. es wird im schlimmsten Falle eine Transaktion geschrieben, welche vom SmartContract abgelehnt wird. Empfohlen ist dies in der Implementierung (Seite) zu testen.</li>
 				</ul>
 			</p>
 		</div>
@@ -85,8 +75,8 @@
     <script src="https://code.jquery.com/jquery.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>	
 	
-	<!-- Eigentliche API Integration für GSJ  -->
-	<script type="text/javascript" src="https://zoernert.github.io/js/api.js"></script>
+	<!-- Eigentliche API Integration für GSJ https://zoernert.github.io -->
+	<script type="text/javascript" src="/js/api.js"></script>
 	
 	<!-- Laden des Beispielcodes -->
 	<script src="./index.js"></script>
