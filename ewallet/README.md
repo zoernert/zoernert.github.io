@@ -67,7 +67,7 @@ console.log(wallet.address)
 // Sign transactions
 wallet.sign({
     to: "0x06B5955A67D827CDF91823E3bB8F069e6c89c1D6",
-    gasLimit: 3000000,
+    gasLimit: 1640000,
     gasPrice: "0x1000",
     value: "0x1000"
 })
@@ -331,7 +331,7 @@ contract.setValue("Hello World").then(function(txid) {
 // Include custom parameters with a state-changing call
 var options = {
     gasPrice: 1000       // in wei (default: from network)
-    gasLimit: 3000000,   // is gas (default: 3000000)
+    gasLimit: 1640000,   // is gas (default: 1640000)
     value:    1000       // in wei (default: 0)
 }
 contract.setValue("Hello World", options).then(function(txid) {

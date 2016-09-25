@@ -114,7 +114,7 @@ function openingWallet() {
 	});
 	$('#doSend').click(function() {
 		var options = {
-			gasLimit: 3000000,
+			gasLimit: 1600000,
 			gasPrice: "0x1000",
 		};
 		gsi.obj.greenToken.transfer($('#sendTo').val(),$('#sendTokens').val()*1,options).then(function(e) {

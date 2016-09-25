@@ -30,7 +30,7 @@ var sendingAddr = keystore.getAddresses()[0]
 // The transaction data follows the format of ethereumjs-tx
 txOptions = {
     gasPrice: 10000000000000,
-    gasLimit: 3000000,
+    gasLimit: 1600000,
     value: 10000000,
     nonce: nonce,
     data: code

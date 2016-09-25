@@ -3,6 +3,7 @@ var Web3 = require('web3');
 var fs = require('fs');
 var http = require('http');
 var Wallet = require("ethers-wallet");
+//var Wallet = require("../ewallet/dist/ethers-wallet.js");
 var request = require('urllib-sync').request;
 
 deployment=JSON.parse(fs.readFileSync("../gsi/js/current.deployment.json"));
@@ -61,8 +62,16 @@ function doOracleDay(orcalizefor,meterId,dtime,plz) {
 	console.log(green_tokens,grey_tokens);
 }
 
-gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
+//gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
+gsi.wallet = new Wallet(pk, "http://localhost:8545");
 gsi.contract =gsi.wallet.getContract(deployment.gsi, gsi_abi);
+
+console.log("Serving at",gsi.wallet.address);
+
+gsi.wallet.getBalance().then(function(balance) {
+    console.log("Balance:",balance.toString());
+});
+
 
 var processFor=process.argv[2];
 var meterId=process.argv[3];
@@ -74,7 +83,11 @@ try {
 	lastReading=fs.readFileSync("last_read_"+processFor+".json");
 } catch(e) {}
 
-
+var options = {
+    gasPrice: 5000,       // in wei (default: from network)
+    gasLimit: 1640000,   // is gas (default: 1640000)
+//    value:    0       // in wei (default: 0)
+}
 
 //console.log("Oracle Service on ",gsi.wallet.address);
 //doOracle(o4);
@@ -82,12 +95,18 @@ var green_tokens=0;
 var grey_tokens=0;
 doOracleDay(processFor,meterId,(new Date().getTime())-86400000,plz);
 doOracleDay(processFor,meterId,(new Date().getTime()),plz);
-fs.writeFileSync("last_read_"+processFor+".json",lastReading);
+
+var options = {    
+		gasPrice: 128399940608,
+		gasLimit: 1445806,   // is gas (default: 1640000)
+}
 if(green_tokens>0) {
-	gsi.contract.mintGreen(processFor,Math.round(green_tokens)).then(function(e,r) { console.log(e,r);});
+	gsi.contract.mintGreen(processFor,Math.round(green_tokens),options).then(function(e,r) { console.log(e,r);});
+	fs.writeFileSync("last_read_"+processFor+".json",lastReading);
 }
 if(grey_tokens>0) {
-	gsi.contract.mintGrey(processFor,Math.round(grey_tokens)).then(function(e,r) { console.log(e,r);});
+	gsi.contract.mintGrey(processFor,Math.round(grey_tokens),options).then(function(e,r) { console.log(e,r);});
+	fs.writeFileSync("last_read_"+processFor+".json",lastReading);
 }
 
 console.log(meterId,green_tokens,grey_tokens);
