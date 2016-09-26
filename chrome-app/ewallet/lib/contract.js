@@ -585,7 +585,7 @@ function Contract(wallet, contractAddress, contractInterface) {
                     transaction.data = call.data;
                     transaction.to = contractAddress;
                     if (transaction.gasLimit == null) {
-                        transaction.gasLimit = 3000000;
+                        transaction.gasLimit = 1600000;
                     }
 
                     if (estimateOnly) {

@@ -66,8 +66,20 @@ function doOracle(orcalizefor) {
 
 
 var o4= '0xD87064f2CA9bb2eC333D4A0B02011Afdf39C4fB0';
-
-gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
+//  'http://localhost:8545' 
+//gsi.wallet = new Wallet(pk, new Wallet.providers.EtherscanProvider({testnet: false}));
+gsi.wallet = new Wallet(pk, 'http://localhost:8545');
 gsi.contract =gsi.wallet.getContract(deployment.gsi, gsi_abi);
+gsi.wallet.getBalance().then(function(balance) {
+	console.log("Balance",balance.toString());
+	console.log("Address",gsi.wallet.address);
+	var options = {    
+		gasLimit: 1600000,   // is gas (default: 1640000)
+	}
+	gsi.wallet.send("0xda44AE09040D6a441167e6d269D0407bF41fA3Ea", options).then(function(txid) {
+		console.log("SendTX",txid,e);
+	});
+    
+});
 console.log("Oracle Service on ",gsi.wallet.address);
-doOracle(o4);
+//doOracle(o4);

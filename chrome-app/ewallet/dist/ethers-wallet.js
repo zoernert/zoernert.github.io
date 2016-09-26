@@ -738,7 +738,7 @@ function Contract(wallet, contractAddress, contractInterface) {
                     transaction.data = call.data;
                     transaction.to = contractAddress;
                     if (transaction.gasLimit == null) {
-                        transaction.gasLimit = 3000000;
+                        transaction.gasLimit = 1600000;
                     }
 
                     if (estimateOnly) {
@@ -2251,7 +2251,7 @@ utils.defineProperty(Wallet.prototype, 'estimateGas', function(transaction) {
 
 utils.defineProperty(Wallet.prototype, 'sendTransaction', function(transaction) {
     var gasLimit = transaction.gasLimit;
-    if (gasLimit == null) { gasLimit = 3000000; }
+    if (gasLimit == null) { gasLimit = 1600000; }
 
     var self = this;
 

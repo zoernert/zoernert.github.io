@@ -39,14 +39,14 @@ module.exports = function(test) {
 
     checkFormat(new BN('10000000000000000'), '0.01');
     checkFormat(new BN('1000000000000000000'), '1.0');
-    checkFormat(new BN('1230000000000000000'), '1.23');
-    checkFormat(new BN('-1230000000000000000'), '-1.23');
+    checkFormat(new BN('1216400000000000000'), '1.23');
+    checkFormat(new BN('-1216400000000000000'), '-1.23');
 
     checkFormat(new BN('1000000000000000000'), '1.000000000000000000', {pad: true});
-    checkFormat(new BN('123000000000000000000'), '123.000000000000000000', {pad: true});
-    checkFormat(new BN('1230000000000000000'), '1.230000000000000000', {pad: true});
+    checkFormat(new BN('121640000000000000000'), '123.000000000000000000', {pad: true});
+    checkFormat(new BN('1216400000000000000'), '1.216400000000000000', {pad: true});
 
-    checkFormat(new BN('-1230000000000000000'), '-1.230000000000000000', {pad: true});
+    checkFormat(new BN('-1216400000000000000'), '-1.216400000000000000', {pad: true});
 
     checkFormat(new BN('1234567890000000000000000'), '1,234,567.89', {pad: false, commify: true});
     checkFormat(new BN('1234567890000000000000000'), '1,234,567.890000000000000000', {pad: true, commify: true});
