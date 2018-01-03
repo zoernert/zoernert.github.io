@@ -8,4 +8,4 @@ PROJECT = "STROMDAO Website"
 
 all:  commit
 
-commit: ;git add -A && git commit -a && git push && git push public;
+commit: ;git add -A && git commit -a && git push && git push origin master;
